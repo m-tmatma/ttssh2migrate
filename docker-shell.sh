@@ -5,8 +5,8 @@ function build_docker {
 }
 
 function run_docker {
-    mkdir -p `pwd`/homedir
-    docker run --rm -it -v `pwd`/homedir:/homedir \
+    mkdir -p `pwd`/workdir
+    docker run --rm -it -v `pwd`/workdir:/workdir \
     svn2git $@
 }
 

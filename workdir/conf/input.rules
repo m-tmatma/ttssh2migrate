@@ -42,9 +42,20 @@ match /(branches|tags)/([^/]+)/
   branch \2
 end match
 
+match /([^/]+)/(branches|tags)/([^/]+)/
+  repository git-repository
+  branch old/\1/\3
+end match
+
+match /([^/]+)/trunk/
+  repository git-repository
+  branch old/\1/trunk
+end match
+
+
 # どうもbranchesでもtagsでもないディレクトリーがあるらしいので、ひとまずそういうブランチとして作ってしまう
 match /(.*)/
   repository git-repository
-  branch \1
+  branch top/\1
 end match
 

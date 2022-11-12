@@ -50,13 +50,22 @@ match /(.*)/
   branch top/\1
 end match
 
-# Expected structure
+#######################################################################################
+## Expected Repository structure for http://svn.osdn.net/svnroot/ttssh2
+#######################################################################################
 
+
+################################
+## 3rd step of structure
+################################
 ## For revision >= r3321
 ## trunk
 ## tags
 ## branches
 
+################################
+## 2nd step of structure
+################################
 ## For r5 <= revision <= r3220
 ## TTProxy
 ## TTProxy/branches
@@ -99,6 +108,9 @@ end match
 ## ttssh2/tags
 ## ttssh2/trunk
 
+################################
+## 1st step of structure
+################################
 ## For revision <= r4
 ## Attic
 ## Attic/branches

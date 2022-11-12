@@ -18,15 +18,6 @@ match /trunk/
   branch master
 end match
 
-# 下記のようなエラーが出るため、問題のtagはスキップする。
-# 参考: https://github.com/svn-all-fast-export/svn2git/issues/26
-# Exporting revision 91340     /tags/broken_tag1 was copied from /tags rev 91339
-# .ttssh2.git : branch broken_tag1 is branching from tags
-# "broken_tag1" in repository "ttssh2.git" is branching from branch "tags" but the latter doesn't exist. Can't continue.
-# 正規表現でマッチしているようなので、(broken_tag1|broken_tag2|broken_tag3)と書けば複数指定できる。
-match /tags/(broken_tag1)/
-end match
-
 # Subversion doesn't understand the Git concept of tags
 # In Subversion, tags are really branches
 #

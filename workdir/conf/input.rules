@@ -44,12 +44,12 @@ end match
 
 match /([^/]+)/(branches|tags)/([^/]+)/
   repository git-repository
-  branch old/\1/\3
+  branch less-than-r3220/\1/\3
 end match
 
 match /([^/]+)/trunk/
   repository git-repository
-  branch old/\1/trunk
+  branch less-than-r3220/\1/trunk
 end match
 
 

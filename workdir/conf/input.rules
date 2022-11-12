@@ -15,7 +15,7 @@ end repository
 
 match /trunk/
   repository ttssh2.git
-  branch main
+  branch master
 end match
 
 # Subversion doesn't understand the Git concept of tags

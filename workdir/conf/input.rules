@@ -5,7 +5,7 @@
 # Declare the repositories we know about:
 #
 
-create repository git-repository
+create repository ttssh2.git
 end repository
 
 #
@@ -14,17 +14,8 @@ end repository
 #
 
 match /trunk/
-  repository git-repository
+  repository ttssh2.git
   branch master
-end match
-
-# 下記のようなエラーが出るため、問題のtagはスキップする。
-# 参考: https://github.com/svn-all-fast-export/svn2git/issues/26
-# Exporting revision 91340     /tags/broken_tag1 was copied from /tags rev 91339
-# .git-repository : branch broken_tag1 is branching from tags
-# "broken_tag1" in repository "git-repository" is branching from branch "tags" but the latter doesn't exist. Can't continue.
-# 正規表現でマッチしているようなので、(broken_tag1|broken_tag2|broken_tag3)と書けば複数指定できる。
-match /tags/(broken_tag1)/
 end match
 
 # Subversion doesn't understand the Git concept of tags
@@ -38,13 +29,90 @@ end match
 # everything as one
 
 match /(branches|tags)/([^/]+)/
-  repository git-repository
+  repository ttssh2.git
   branch \2
 end match
 
-# どうもbranchesでもtagsでもないディレクトリーがあるらしいので、ひとまずそういうブランチとして作ってしまう
-match /(.*)/
-  repository git-repository
-  branch \1
+match /([^/]+)/(branches|tags)/([^/]+)/
+  repository ttssh2.git
+  branch less-than-r3220/\1/\3
 end match
 
+match /([^/]+)/trunk/
+  repository ttssh2.git
+  branch less-than-r3220/\1/trunk
+end match
+
+
+# どうもbranchesでもtagsでもないディレクトリーがあるらしいので、ひとまずそういうブランチとして作ってしまう
+match /(.*)/
+  repository ttssh2.git
+  branch top/\1
+end match
+
+#######################################################################################
+## Expected Repository structure for http://svn.osdn.net/svnroot/ttssh2
+#######################################################################################
+
+
+################################
+## 3rd step of structure
+################################
+## For revision >= r3321
+## trunk
+## tags
+## branches
+
+################################
+## 2nd step of structure
+################################
+## For r5 <= revision <= r3220
+## TTProxy
+## TTProxy/branches
+## TTProxy/tags
+## TTProxy/trunk
+## TTXKanjiMenu
+## TTXKanjiMenu/branches
+## TTXKanjiMenu/tags
+## TTXKanjiMenu/trunk
+## TTXSamples
+## TTXSamples/branches
+## TTXSamples/tags
+## TTXSamples/trunk
+## cygterm
+## cygterm/branches
+## cygterm/tags
+## cygterm/trunk
+## doc
+## doc/branches
+## doc/tags
+## doc/trunk
+## installer
+## installer/branches
+## installer/tags
+## installer/trunk
+## japned
+## japned/branches
+## japned/tags
+## japned/trunk
+## teraterm
+## teraterm/branches
+## teraterm/tags
+## teraterm/trunk
+## ttpmenu
+## ttpmenu/branches
+## ttpmenu/tags
+## ttpmenu/trunk
+## ttssh2
+## ttssh2/branches
+## ttssh2/tags
+## ttssh2/trunk
+
+################################
+## 1st step of structure
+################################
+## For revision <= r4
+## Attic
+## Attic/branches
+## Attic/tags
+## Attic/trunk

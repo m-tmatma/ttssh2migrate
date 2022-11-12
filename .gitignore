@@ -1,4 +1,5 @@
 /workdir/ttssh2
 /workdir/gitdir
 *.svndmp
+.bash_history
 

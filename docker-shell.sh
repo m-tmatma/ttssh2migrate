@@ -9,6 +9,7 @@ function run_docker {
     docker run --rm \
         -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) \
         -it -v `pwd`/workdir:/home/work \
+        -w /home/work \
         svn2git_plus $@
 }
 

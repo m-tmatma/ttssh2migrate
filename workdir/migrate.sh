@@ -8,7 +8,7 @@ mkdir -p $GITDIR
 cd       $GITDIR
 
 svn-all-fast-export \
-    --rules /workdir/conf/input.rules \
+    --rules $SCRIPT_DIR/conf/input.rules \
     --add-metadata \
     --svn-branches \
     --debug-rules \

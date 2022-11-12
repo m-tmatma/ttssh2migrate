@@ -59,3 +59,57 @@ match /(.*)/
   branch top/\1
 end match
 
+# Expected structure
+
+## For revision >= r3321
+## trunk
+## tags
+## branches
+
+## For r5 <= revision <= r3220
+## TTProxy
+## TTProxy/branches
+## TTProxy/tags
+## TTProxy/trunk
+## TTXKanjiMenu
+## TTXKanjiMenu/branches
+## TTXKanjiMenu/tags
+## TTXKanjiMenu/trunk
+## TTXSamples
+## TTXSamples/branches
+## TTXSamples/tags
+## TTXSamples/trunk
+## cygterm
+## cygterm/branches
+## cygterm/tags
+## cygterm/trunk
+## doc
+## doc/branches
+## doc/tags
+## doc/trunk
+## installer
+## installer/branches
+## installer/tags
+## installer/trunk
+## japned
+## japned/branches
+## japned/tags
+## japned/trunk
+## teraterm
+## teraterm/branches
+## teraterm/tags
+## teraterm/trunk
+## ttpmenu
+## ttpmenu/branches
+## ttpmenu/tags
+## ttpmenu/trunk
+## ttssh2
+## ttssh2/branches
+## ttssh2/tags
+## ttssh2/trunk
+
+## For revision <= r4
+## Attic
+## Attic/branches
+## Attic/tags
+## Attic/trunk

@@ -1,13 +1,15 @@
 #!/bin/bash
 
 function build_docker {
-    docker build -t svn2git `pwd`/svn2git
+    docker build -t svn2git_plus `pwd`/docker
 }
 
 function run_docker {
     mkdir -p `pwd`/workdir
-    docker run --rm -it -v `pwd`/workdir:/workdir \
-    svn2git $@
+    docker run --rm \
+        -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) \
+        -it -v `pwd`/workdir:/home/work \
+        svn2git_plus $@
 }
 
 function show_help {

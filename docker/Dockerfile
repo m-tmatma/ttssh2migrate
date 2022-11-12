@@ -1,4 +1,6 @@
-FROM lightraven/svn-all-fast-export
+# https://hub.docker.com/r/lightraven/svn-all-fast-export/tags
+# svn-all-fast-export/svn2git
+FROM lightraven/svn-all-fast-export:cf94ee37048a2a096b12f7681a65ce7b45a406d9
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update --fix-missing && apt-get dist-upgrade -y && apt-get autoremove --purge -y \
  && apt-get install --fix-missing -y \

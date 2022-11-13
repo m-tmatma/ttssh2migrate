@@ -1,5 +1,6 @@
 /workdir/ttssh2
 /workdir/gitdir
+/workdir/.lesshst
+/workdir/.subversion/
 *.svndmp
 .bash_history
-

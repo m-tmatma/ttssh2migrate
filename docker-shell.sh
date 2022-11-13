@@ -17,11 +17,13 @@ function show_help {
     echo $0 build
     echo $0 bash
     echo $0 shell
+    echo $0 migrate
 }
 
 case $1 in
   "build" ) build_docker ;;
   "bash"  ) run_docker bash ;;
   "shell" ) run_docker bash ;;
+  "migrate" ) run_docker ./migrate.sh ;;
   *       ) show_help ;;
 esac

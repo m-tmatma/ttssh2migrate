@@ -66,3 +66,7 @@ jobs:
         run: |
           ./workdir/2.fiter-svndmp.sh
 
+      - name: migrate
+        run: |
+          ./docker-shell.sh migrate
+

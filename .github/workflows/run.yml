@@ -61,3 +61,8 @@ jobs:
           echo "key        = ${{ env.cache-version }}-ttssh2-r${{ env.revision }}"
           echo "cache-hit  = ${{steps.cache-ttssh2.outputs.cache-hit}}"
           ./workdir/1.mirror-ttssh2.sh
+
+      - name: filter svn dump
+        run: |
+          ./workdir/2.fiter-svndmp.sh
+

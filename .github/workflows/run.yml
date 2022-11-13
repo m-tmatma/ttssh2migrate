@@ -23,6 +23,14 @@ jobs:
           mkdir -p workdir/ttssh2.org
           ls workdir/ttssh2.org
 
+      # See https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-environment-variable
+      - name: Get the youngest revision
+        id: get_revision
+        run: |
+          REVISION=$(svn info  --no-newline --show-item revision http://svn.osdn.net/svnroot/ttssh2/)
+          echo "revision=$REVISION" >> $GITHUB_ENV
+          cat  $GITHUB_ENV
+
       - name: show revision
         id: show_revision
         run: |

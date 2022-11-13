@@ -1,9 +1,10 @@
 #!/bin/sh
 
+SRC_REPO=ttssh2.org
 DST_REPO=ttssh2
 rm -rf $DST_REPO
 svnadmin create --compatible-version 1.8 $DST_REPO
-cat ttssh2.svndmp | \
+svnadmin dump $SRC_REPO  | \
     svndumpfilter exclude \
         "･ｳ･ﾔ｡ｼ ｡ﾁ ttpdlg.rc" \
         "/Attic" \

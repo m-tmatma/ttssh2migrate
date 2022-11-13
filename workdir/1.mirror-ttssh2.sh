@@ -1,13 +1,14 @@
 #!/bin/bash
 
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
-URL=file://$SCRIPT_DIR/ttssh2
+SRC_REPO=ttssh2.org
+URL=file://$SCRIPT_DIR/$SRC_REPO
 
 cd $SCRIPT_DIR
-if [ ! -f ttssh2/format ]; then
-    svnadmin create ttssh2
+if [ ! -f $SRC_REPO/format ]; then
+    svnadmin create $SRC_REPO
 
-    cd $SCRIPT_DIR/ttssh2
+    cd $SCRIPT_DIR/$SRC_REPO
     echo '#!/bin/sh'  > hooks/pre-revprop-change
     echo 'exit 0'    >> hooks/pre-revprop-change
     chmod +x            hooks/pre-revprop-change
@@ -18,6 +19,6 @@ else
     echo "Skip: svnsync init"
 fi
 
-cd $SCRIPT_DIR/ttssh2
+cd $SCRIPT_DIR/$SRC_REPO
 echo "Running: svnsync sync"
 svnsync sync $URL

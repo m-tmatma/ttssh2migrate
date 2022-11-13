@@ -1,5 +1,8 @@
 #!/bin/sh
 
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+cd $SCRIPT_DIR
+
 SRC_REPO=ttssh2.org
 DST_REPO=ttssh2
 rm -rf $DST_REPO

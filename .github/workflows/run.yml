@@ -80,7 +80,6 @@ jobs:
         run: |
           tar cfvj gitdir.tar.bz2      gitdir
           tar cfvj ttssh2.tar.bz2      ttssh2
-          tar cfvj ttssh2.org.tar.bz2  ttssh2.org
 
       - uses: actions/upload-artifact@v3
         with:

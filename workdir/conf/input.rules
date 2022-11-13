@@ -58,7 +58,7 @@ end match
 
 match /([^/]+)/trunk/
   repository ttssh2.git
-  branch l\1/trunk
+  branch \1/trunk
   max revision 3220
 end match
 

@@ -11,12 +11,22 @@ on:
 
 env:
   cache-version: v1
+  LANG: "ja_JP.UTF-8"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: ja_JP.UTF-8
+        run: |
+            sudo locale-gen ja_JP.UTF-8
+            sudo update-locale LANG=ja_JP.UTF-8
+
+      - name: date
+        run: |
+            date
 
       - name: prepare cache directory in advance
         run: |

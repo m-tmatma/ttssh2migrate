@@ -25,6 +25,12 @@ end repository
 # So we don't pretend that SVN tags are Git tags and then import
 # everything as one
 
+####################################################################################################################################
+# Attic で始まるディレクトリ => 捨てる
+# https://github.com/svn-all-fast-export/svn2git/blob/6b987addebe07ccfef2834a0be9db38778938b5b/samples/ignore-branch.rules#L23-L24
+####################################################################################################################################
+match /Attic/
+end match
 
 ####################################################################################################################################
 # Rule for revision >= r3221 (https://ja.osdn.net/projects/ttssh2/scm/svn/commits/3221)

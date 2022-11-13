@@ -1,15 +1,45 @@
 name: Run
 on:
   pull_request:
-    branches:    
+    branches:
       - main
   push:
-    branches:    
+    branches:
       - main
       - 'feature/**'
       - 'releases/**'
+
+env:
+  cache-version: v1
+
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: prepare cache directory in advance
+        run: |
+          mkdir -p workdir/ttssh2.org
+          ls workdir/ttssh2.org
+
+      - name: show revision
+        id: show_revision
+        run: |
+          echo "${{ env.revision }}"
+          echo "key        = ${{ env.cache-version }}-ttssh2-r${{ env.revision }}"
+          echo "cache-hit  = ${{steps.cache-ttssh2.outputs.cache-hit}}"
+
+      - name: Cache
+        id: cache-svn
+        uses: actions/cache@v3
+        with:
+          path: workdir/ttssh2.org
+          key: ${{ env.cache-version }}-ttssh2-r${{ env.revision }}
+
+      - name: mirror
+        run: |
+          echo "${{ env.revision }}"
+          echo "key        = ${{ env.cache-version }}-ttssh2-r${{ env.revision }}"
+          echo "cache-hit  = ${{steps.cache-ttssh2.outputs.cache-hit}}"
+          ./workdir/1.mirror-ttssh2.sh

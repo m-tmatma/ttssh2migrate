@@ -15,11 +15,6 @@ end repository
 # Note: rules must end in a slash
 #
 
-match /trunk/
-  repository ttssh2.git
-  branch master
-end match
-
 # Subversion doesn't understand the Git concept of tags
 # In Subversion, tags are really branches
 #
@@ -29,6 +24,11 @@ end match
 #
 # So we don't pretend that SVN tags are Git tags and then import
 # everything as one
+
+match /trunk/
+  repository ttssh2.git
+  branch master
+end match
 
 match /(branches|tags)/([^/]+)/
   repository ttssh2.git

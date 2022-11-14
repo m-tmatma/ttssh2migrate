@@ -45,7 +45,7 @@ jobs:
         id: show_revision
         run: |
           echo "${{ env.revision }}"
-          echo "key        = ${{ env.cache-version }}-ttssh2-r${{ env.revision }}"
+          echo "key        = ${{ env.cache-version }}-ttssh2"
           echo "cache-hit  = ${{steps.cache-ttssh2.outputs.cache-hit}}"
 
       - name: Cache
@@ -58,7 +58,7 @@ jobs:
       - name: mirror
         run: |
           echo "${{ env.revision }}"
-          echo "key        = ${{ env.cache-version }}-ttssh2-r${{ env.revision }}"
+          echo "key        = ${{ env.cache-version }}-ttssh2"
           echo "cache-hit  = ${{steps.cache-ttssh2.outputs.cache-hit}}"
           ./workdir/1.mirror-ttssh2.sh
 

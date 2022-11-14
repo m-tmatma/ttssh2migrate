@@ -91,3 +91,10 @@ jobs:
           path: |
             workdir/**.tar.bz2
             workdir/gitdir/**.tar.bz2
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: artifacts log
+          path: |
+            workdir/gitdir/gitlog-ttssh2.git
+            workdir/gitdir/log-ttssh2.git

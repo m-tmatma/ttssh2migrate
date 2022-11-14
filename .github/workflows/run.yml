@@ -78,12 +78,12 @@ jobs:
       - name: archive
         working-directory: workdir
         run: |
-          tar cfvj ttssh2-svn.tar.bz2      ttssh2
+          tar cfj ttssh2-svn.tar.bz2      ttssh2
 
       - name: archive
         working-directory: workdir/gitdir
         run: |
-          tar cfvj ttssh2-git.tar.bz2      ttssh2.git
+          tar cfj ttssh2-git.tar.bz2      ttssh2.git
 
       - uses: actions/upload-artifact@v3
         with:

@@ -28,7 +28,7 @@ jobs:
         run: |
             date
 
-      - name: prepare cache directory in advance
+      - name: prepare cache directory (This is for the first time build.)
         run: |
           mkdir -p workdir/ttssh2.org
           ls workdir/ttssh2.org

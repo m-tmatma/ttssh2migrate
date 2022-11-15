@@ -39,7 +39,7 @@ jobs:
       - name: show revision
         id: show_revision
         run: |
-          echo "${{ env.revision }}"
+          echo "${{env.revision}}"
 
       - name: prepare cache directory (This is for the first time build.)
         run: |
@@ -51,12 +51,12 @@ jobs:
         uses: actions/cache@v3
         with:
           path: workdir/ttssh2.org
-          key: ${{ env.cache-version }}-ttssh2
+          key: ${{env.cache-version}}-ttssh2
 
       - name: mirror
         run: |
-          echo "${{ env.revision }}"
-          echo "key        = ${{ env.cache-version }}-ttssh2"
+          echo "${{env.revision}}"
+          echo "key        = ${{env.cache-version}}-ttssh2"
           echo "cache-hit  = ${{steps.cache-svn.outputs.cache-hit}}"
           ./workdir/1.mirror-ttssh2.sh
 

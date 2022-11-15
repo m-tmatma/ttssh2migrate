@@ -70,29 +70,39 @@ jobs:
 
       - name: migrate
         run: |
-          ./docker-shell.sh migrate
+          ./docker-shell.sh migrate | tee migration.log
 
+      - name: artifacts migration log
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: migration log
+          path: |
+            workdir/gitdir/gitlog-ttssh2.git
+            workdir/gitdir/log-ttssh2.git
 
-      - name: archive
+      - name: artifacts migration log console
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: migration log console
+          path: |
+            migration.log
+
+      - name: archive SVN
         working-directory: workdir
         run: |
           tar cfj ttssh2-svn.tar.bz2      ttssh2
 
-      - name: archive
+      - name: archive GIT
         working-directory: workdir/gitdir
         run: |
           tar cfj ttssh2-git.tar.bz2      ttssh2.git
 
-      - uses: actions/upload-artifact@v3
+      - name: artifacts converted repository
+        uses: actions/upload-artifact@v3
         with:
           name: artifacts
           path: |
             workdir/**.tar.bz2
             workdir/gitdir/**.tar.bz2
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: artifacts log
-          path: |
-            workdir/gitdir/gitlog-ttssh2.git
-            workdir/gitdir/log-ttssh2.git

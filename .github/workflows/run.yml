@@ -70,8 +70,14 @@ jobs:
 
       - name: migrate
         run: |
-          ./docker-shell.sh migrate
+          ./docker-shell.sh migrate | tee migration.log
 
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: migration log
+          path: |
+            migration.log
 
       - name: archive
         working-directory: workdir

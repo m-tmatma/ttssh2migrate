@@ -28,11 +28,6 @@ jobs:
         run: |
             date
 
-      - name: prepare cache directory in advance
-        run: |
-          mkdir -p workdir/ttssh2.org
-          ls workdir/ttssh2.org
-
       # See https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-environment-variable
       - name: Get the youngest revision
         id: get_revision
@@ -45,8 +40,11 @@ jobs:
         id: show_revision
         run: |
           echo "${{ env.revision }}"
-          echo "key        = ${{ env.cache-version }}-ttssh2"
-          echo "cache-hit  = ${{steps.cache-ttssh2.outputs.cache-hit}}"
+
+      - name: prepare cache directory (This is for the first time build.)
+        run: |
+          mkdir -p workdir/ttssh2.org
+          ls workdir/ttssh2.org
 
       - name: Cache
         id: cache-svn
@@ -59,7 +57,7 @@ jobs:
         run: |
           echo "${{ env.revision }}"
           echo "key        = ${{ env.cache-version }}-ttssh2"
-          echo "cache-hit  = ${{steps.cache-ttssh2.outputs.cache-hit}}"
+          echo "cache-hit  = ${{steps.cache-svn.outputs.cache-hit}}"
           ./workdir/1.mirror-ttssh2.sh
 
       - name: filter svn dump

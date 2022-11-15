@@ -77,7 +77,7 @@ jobs:
 
       - name: migrate
         run: |
-          ./workdir/migrate.sh | tee migration.log
+          ./workdir/migrate.sh
 
       - name: artifacts migration log
         uses: actions/upload-artifact@v3
@@ -87,16 +87,6 @@ jobs:
           path: |
             workdir/gitdir/gitlog-ttssh2.git
             workdir/gitdir/log-ttssh2.git
-          # See https://github.com/actions/upload-artifact#retention-period
-          retention-days: ${{env.retention-days}}
-
-      - name: artifacts migration log console
-        uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: migration-log-console-build-${{github.run_number}}-${{github.run_id}}
-          path: |
-            migration.log
           # See https://github.com/actions/upload-artifact#retention-period
           retention-days: ${{env.retention-days}}
 

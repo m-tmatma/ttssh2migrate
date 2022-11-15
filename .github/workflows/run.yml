@@ -45,8 +45,6 @@ jobs:
         id: show_revision
         run: |
           echo "${{ env.revision }}"
-          echo "key        = ${{ env.cache-version }}-ttssh2"
-          echo "cache-hit  = ${{steps.cache-svn.outputs.cache-hit}}"
 
       - name: Cache
         id: cache-svn

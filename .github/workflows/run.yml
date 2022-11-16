@@ -16,6 +16,7 @@ on:
 
 env:
   cache-version: v2
+  retention-days: 2
   LANG: "ja_JP.UTF-8"
 
 jobs:
@@ -86,6 +87,8 @@ jobs:
           path: |
             workdir/gitdir/gitlog-ttssh2.git
             workdir/gitdir/log-ttssh2.git
+          # See https://github.com/actions/upload-artifact#retention-period
+          retention-days: ${{env.retention-days}}
 
       - name: artifacts migration log console
         uses: actions/upload-artifact@v3
@@ -94,6 +97,8 @@ jobs:
           name: migration log console
           path: |
             migration.log
+          # See https://github.com/actions/upload-artifact#retention-period
+          retention-days: ${{env.retention-days}}
 
       - name: archive SVN
         working-directory: workdir
@@ -112,3 +117,5 @@ jobs:
           path: |
             workdir/**.tar.bz2
             workdir/gitdir/**.tar.bz2
+          # See https://github.com/actions/upload-artifact#retention-period
+          retention-days: ${{env.retention-days}}

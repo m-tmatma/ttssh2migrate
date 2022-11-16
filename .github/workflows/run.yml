@@ -83,7 +83,7 @@ jobs:
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: migration log
+          name: migration-log-build-${{github.run_number}}-${{github.run_id}}
           path: |
             workdir/gitdir/gitlog-ttssh2.git
             workdir/gitdir/log-ttssh2.git
@@ -94,7 +94,7 @@ jobs:
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: migration log console
+          name: migration-log-console-build-${{github.run_number}}-${{github.run_id}}
           path: |
             migration.log
           # See https://github.com/actions/upload-artifact#retention-period
@@ -113,7 +113,7 @@ jobs:
       - name: artifacts converted repository
         uses: actions/upload-artifact@v3
         with:
-          name: artifacts
+          name: artifacts-build-${{github.run_number}}-${{github.run_id}}
           path: |
             workdir/**.tar.bz2
             workdir/gitdir/**.tar.bz2

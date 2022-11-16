@@ -9,6 +9,11 @@ on:
       - 'feature/**'
       - 'releases/**'
 
+  schedule:
+    # See https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+    # This example triggers the workflow every day at 5:00 and 19:00 UTC:
+    - cron:  '0 5,19 * * *'
+
 env:
   cache-version: v2
   LANG: "ja_JP.UTF-8"

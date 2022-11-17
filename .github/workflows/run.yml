@@ -25,6 +25,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install svn-all-fast-export
+        run: |
+            sudo apt install -y svn-all-fast-export
+
       - name: ja_JP.UTF-8
         run: |
             sudo locale-gen ja_JP.UTF-8
@@ -71,13 +75,9 @@ jobs:
         run: |
           ./workdir/2.fiter-svndmp.sh
 
-      - name: build docker image
-        run: |
-          ./docker-shell.sh build
-
       - name: migrate
         run: |
-          ./docker-shell.sh migrate | tee migration.log
+          ./workdir/migrate.sh
 
       - name: artifacts migration log
         uses: actions/upload-artifact@v3
@@ -87,16 +87,6 @@ jobs:
           path: |
             workdir/gitdir/gitlog-ttssh2.git
             workdir/gitdir/log-ttssh2.git
-          # See https://github.com/actions/upload-artifact#retention-period
-          retention-days: ${{env.retention-days}}
-
-      - name: artifacts migration log console
-        uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: migration-log-console-build-${{github.run_number}}-${{github.run_id}}
-          path: |
-            migration.log
           # See https://github.com/actions/upload-artifact#retention-period
           retention-days: ${{env.retention-days}}
 

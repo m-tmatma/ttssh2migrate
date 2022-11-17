@@ -33,6 +33,29 @@ match /Attic/
 end match
 
 ####################################################################################################################################
+# Rule for /branches/cygterm
+####################################################################################################################################
+match /(branches)/(cygterm)/
+  repository ttssh2.git
+  branch \2
+  min revision 9775
+end match
+
+match /(branches)/(cygterm)/
+  # ignore the following ranges
+  max revision 9774
+  min revision 9772
+end match
+
+match /(branches)/(cygterm)/
+  repository ttssh2.git
+  branch \2-up-to-r9771
+  max revision 9771
+  min revision 3221
+end match
+
+
+####################################################################################################################################
 # Rule for revision >= r3221 (https://ja.osdn.net/projects/ttssh2/scm/svn/commits/3221)
 ####################################################################################################################################
 match /trunk/

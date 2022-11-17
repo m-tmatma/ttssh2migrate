@@ -69,15 +69,15 @@ jobs:
           echo "${{env.revision}}"
           echo "key        = ${{env.cache-version}}-ttssh2-r${{env.revision}}"
           echo "cache-hit  = ${{steps.cache-svn.outputs.cache-hit}}"
-          ./workdir/1.mirror-ttssh2.sh
+          ./1.mirror-ttssh2.sh
 
       - name: filter svn dump
         run: |
-          ./workdir/2.fiter-svndmp.sh
+          ./2.fiter-svndmp.sh
 
       - name: migrate
         run: |
-          ./workdir/migrate.sh
+          ./migrate.sh
 
       - name: artifacts migration log
         uses: actions/upload-artifact@v3

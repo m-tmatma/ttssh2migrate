@@ -3,8 +3,9 @@
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 cd $SCRIPT_DIR
 
-SRC_REPO=ttssh2.org
-DST_REPO=ttssh2
+WORKDIR=$SCRIPT_DIR/workdir
+SRC_REPO=$WORKDIR/ttssh2.org
+DST_REPO=$WORKDIR/ttssh2
 FILES=$(cat $SCRIPT_DIR/exclude-files.txt)
 rm -rf $DST_REPO
 svnadmin create --compatible-version 1.8 $DST_REPO

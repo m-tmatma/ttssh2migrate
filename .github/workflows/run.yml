@@ -75,6 +75,11 @@ jobs:
         run: |
           ./2.fiter-svndmp.sh
 
+      - name: archive SVN
+        working-directory: workdir
+        run: |
+          tar cfj ttssh2-svn.tar.bz2      ttssh2
+
       - name: migrate
         run: |
           ./migrate.sh
@@ -89,11 +94,6 @@ jobs:
             workdir/gitdir/log-ttssh2
           # See https://github.com/actions/upload-artifact#retention-period
           retention-days: ${{env.retention-days}}
-
-      - name: archive SVN
-        working-directory: workdir
-        run: |
-          tar cfj ttssh2-svn.tar.bz2      ttssh2
 
       - name: archive GIT
         working-directory: workdir/gitdir

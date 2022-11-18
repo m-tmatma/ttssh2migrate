@@ -80,6 +80,15 @@ jobs:
         run: |
           tar cfj ttssh2-svn.tar.bz2      ttssh2
 
+      - name: artifacts SVN repository
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts-SVN-build-${{github.run_number}}-${{github.run_id}}
+          path: |
+            workdir/**.tar.bz2
+          # See https://github.com/actions/upload-artifact#retention-period
+          retention-days: ${{env.retention-days}}
+
       - name: migrate
         run: |
           ./migrate.sh
@@ -100,12 +109,11 @@ jobs:
         run: |
           tar cfj ttssh2-git.tar.bz2      ttssh2
 
-      - name: artifacts converted repository
+      - name: artifacts GIT repository
         uses: actions/upload-artifact@v3
         with:
-          name: artifacts-build-${{github.run_number}}-${{github.run_id}}
+          name: artifacts-GIT-build-${{github.run_number}}-${{github.run_id}}
           path: |
-            workdir/**.tar.bz2
             workdir/gitdir/**.tar.bz2
           # See https://github.com/actions/upload-artifact#retention-period
           retention-days: ${{env.retention-days}}

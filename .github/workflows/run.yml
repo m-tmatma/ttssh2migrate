@@ -56,8 +56,6 @@ jobs:
       - name: create dir for svn original (This is for the first time build.)
         run: |
           mkdir -p ${{env.svn-org}}
-          ls       ${{env.svn-org}}
-          echo "key        = ${{env.cache-version}}-ttssh2-r${{env.revision}}"
 
       - name: Cache svn original
         id: cache-svn
@@ -68,9 +66,6 @@ jobs:
 
       - name: mirror
         run: |
-          echo "${{env.revision}}"
-          echo "key        = ${{env.cache-version}}-ttssh2-r${{env.revision}}"
-          echo "cache-hit  = ${{steps.cache-svn.outputs.cache-hit}}"
           ./1.mirror-ttssh2.sh
 
       - name: create dir for svn filtered (This is for the first time build.)

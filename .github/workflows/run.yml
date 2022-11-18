@@ -73,7 +73,7 @@ jobs:
 
       - name: filter svn dump
         run: |
-          ./2.fiter-svndmp.sh
+          ./2.filter-svndmp.sh
 
       - name: archive SVN
         working-directory: workdir

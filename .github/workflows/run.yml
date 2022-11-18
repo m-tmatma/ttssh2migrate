@@ -110,13 +110,13 @@ jobs:
         with:
           name: migration-log-build-${{github.run_number}}-${{github.run_id}}
           path: |
-            workdir/gitdir/gitlog-ttssh2
-            workdir/gitdir/log-ttssh2
+            workdir/git_root/gitlog-ttssh2
+            workdir/git_root/log-ttssh2
           # See https://github.com/actions/upload-artifact#retention-period
           retention-days: ${{env.retention-days}}
 
       - name: archive GIT
-        working-directory: workdir/gitdir
+        working-directory: workdir/git_root
         run: |
           tar cfj ttssh2-git.tar.bz2      ttssh2
 
@@ -125,6 +125,6 @@ jobs:
         with:
           name: artifacts-GIT-build-${{github.run_number}}-${{github.run_id}}
           path: |
-            workdir/gitdir/**.tar.bz2
+            workdir/git_root/**.tar.bz2
           # See https://github.com/actions/upload-artifact#retention-period
           retention-days: ${{env.retention-days}}

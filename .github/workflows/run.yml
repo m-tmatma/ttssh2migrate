@@ -77,7 +77,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{env.svn-new}}
-          key: ${{env.cache-version}}-ttssh2-r${{env.revision}}-${{ hashFiles('2.filter-svndmp.sh', '.github/workflows/run.yml') }}
+          key: ${{env.cache-version}}-ttssh2-r${{env.revision}}-${{ hashFiles('2.filter-svndmp.sh', '.github/workflows/run.yml', 'input.rules') }}
 
       - name: filter svn dump
         if: ${{ steps.cache-svn-filtered.outputs.cache-hit != 'true' }}

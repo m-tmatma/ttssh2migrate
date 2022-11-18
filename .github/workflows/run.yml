@@ -18,6 +18,8 @@ env:
   cache-version: v2
   retention-days: 2
   LANG: "ja_JP.UTF-8"
+  svn-org: workdir/ttssh2.org
+  svn-new: workdir/ttssh2
 
 jobs:
   build:
@@ -53,15 +55,15 @@ jobs:
 
       - name: prepare cache directory (This is for the first time build.)
         run: |
-          mkdir -p workdir/ttssh2.org
-          ls workdir/ttssh2.org
+          mkdir -p ${{env.svn-org}}
+          ls       ${{env.svn-org}}
           echo "key        = ${{env.cache-version}}-ttssh2-r${{env.revision}}"
 
       - name: Cache
         id: cache-svn
         uses: actions/cache@v3
         with:
-          path: workdir/ttssh2.org
+          path: ${{env.svn-org}}
           key: ${{env.cache-version}}-ttssh2-r${{env.revision}}
 
       - name: mirror
@@ -71,7 +73,19 @@ jobs:
           echo "cache-hit  = ${{steps.cache-svn.outputs.cache-hit}}"
           ./1.mirror-ttssh2.sh
 
+      - name: prepare cache directory (This is for the first time build.)
+        run: |
+          mkdir -p ${{env.svn-new}}
+
+      - name: Cache filtered
+        id: cache-svn-filtered
+        uses: actions/cache@v3
+        with:
+          path: ${{env.svn-new}}
+          key: ${{env.cache-version}}-ttssh2-r${{env.revision}}-${{ hashFiles('2.filter-svndmp.sh', '.github/workflows/run.yml') }}
+
       - name: filter svn dump
+        if: ${{ steps.cache-svn-filtered.outputs.cache-hit != 'true' }}
         run: |
           ./2.filter-svndmp.sh
 

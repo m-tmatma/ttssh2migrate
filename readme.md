@@ -54,3 +54,7 @@ svn-all-fast-export は apt でインストールする。
 
 r1304 に追加された `/teraterm/branches/avendor/source/ttdlg/･ｳ･ﾔ｡ｼ ｡ﾁ ttpdlg.rc` を除外できない。
 
+## リビジョングラフ
+
+[TortoiseGitによるリビジョングラフ](ttssh2.svg)
+

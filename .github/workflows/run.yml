@@ -100,6 +100,20 @@ jobs:
           # See https://github.com/actions/upload-artifact#retention-period
           retention-days: ${{env.retention-days}}
 
+      - name: svn log
+        run: |
+          svn log -v file://$(pwd)/${{env.svn-org}} > workdir/svn-org.log
+          svn log -v file://$(pwd)/${{env.svn-new}} > workdir/svn-new.log
+
+      - name: artifacts SVN log
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts-SVN-log-${{github.run_number}}-${{github.run_id}}
+          path: |
+            workdir/**.log
+          # See https://github.com/actions/upload-artifact#retention-period
+          retention-days: ${{env.retention-days}}
+
       - name: migrate
         run: |
           ./migrate.sh

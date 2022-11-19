@@ -2,12 +2,12 @@
 
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 WORKDIR=$SCRIPT_DIR/workdir
-SVNDIR=$WORKDIR/ttssh2
-GITDIR=$WORKDIR/gitdir
+SVN_ROOT=$WORKDIR/ttssh2
+GIT_ROOT=$WORKDIR/gitdir
 
-rm   -rf $GITDIR
-mkdir -p $GITDIR
-cd       $GITDIR
+rm   -rf $GIT_ROOT
+mkdir -p $GIT_ROOT
+cd       $GIT_ROOT
 
 svn-all-fast-export \
     --rules $SCRIPT_DIR/input.rules \
@@ -16,4 +16,4 @@ svn-all-fast-export \
     --debug-rules \
     --svn-ignore \
     --empty-dirs \
-    $SVNDIR
+    $SVN_ROOT

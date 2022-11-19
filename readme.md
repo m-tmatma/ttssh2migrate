@@ -13,11 +13,13 @@ sudo apt install -y svn-all-fast-export
 
 ### 成果物
 
-|  説明  | パス  |
-| ---- | ---- |
-|  gitリポジトリ  |  `workdir/gitdir/ttssh2`  |
-|  変換元svnリポジトリ  |  `workdir/ttssh2`   |
-|  オリジナルsvnリポジトリ  |  `workdir/ttssh2.org`  |
+|  説明  | パス  | GitHub Actions の artifacts でダウンロード  |
+| ---- | ---- | ---- |
+|  gitリポジトリ  |  `workdir/gitdir/ttssh2`  | 〇  |
+|  フィルター後のsvnリポジトリ  |  `workdir/ttssh2`   | 〇  |
+|  オリジナルsvnリポジトリ  |  `workdir/ttssh2.org`  | × (省略) |
+|  フィルター後のsvnリポジトリの `svn log`  |  `workdir/ttssh2`   | 〇  |
+|  オリジナルsvnリポジトリの `svn log`  |  `workdir/ttssh2.org`  | 〇  |
 
 ## 仕組み
 

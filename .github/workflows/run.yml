@@ -115,6 +115,19 @@ jobs:
           # See https://github.com/actions/upload-artifact#retention-period
           retention-days: ${{env.retention-days}}
 
+      - name: extract filenames
+        run: |
+          ./extract-filenames.sh
+
+      - name: artifacts filenames
+        uses: actions/upload-artifact@v3
+        with:
+          name: filenames-build-${{github.run_number}}-${{github.run_id}}
+          path: |
+            workdir/file*.txt
+          # See https://github.com/actions/upload-artifact#retention-period
+          retention-days: ${{env.retention-days}}
+
       - name: archive GIT
         working-directory: workdir/gitdir
         run: |

@@ -57,4 +57,7 @@ r1304 に追加された `/teraterm/branches/avendor/source/ttdlg/･ｳ･ﾔ�
 ## リビジョングラフ
 
 [TortoiseGitによるリビジョングラフ](ttssh2.svg)
+上記リンクを押したあと RAW を選ぶ。
+グラフが巨大なのでスクロールして確認したところに移動する。
+
 

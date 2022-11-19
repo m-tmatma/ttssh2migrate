@@ -20,5 +20,7 @@ svnadmin dump $SRC_REPO  | \
         --pattern "*.user" \
         --pattern "*.aps" \
         --pattern "*.pch" \
+        --pattern "*.suo" \
+        --pattern "*.sbr" \
         | \
     svnadmin load $DST_REPO

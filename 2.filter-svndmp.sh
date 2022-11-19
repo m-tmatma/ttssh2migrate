@@ -12,6 +12,8 @@ svnadmin dump $SRC_REPO  | \
     svndumpfilter exclude \
         "･ｳ･ﾔ｡ｼ ｡ﾁ ttpdlg.rc" \
         "/Attic" \
+        | \
+    svndumpfilter exclude \
         --pattern "*.opt" \
         --pattern "*.ncb" \
         --pattern "*.res" \

@@ -1,9 +1,17 @@
 name: Run
 on:
   pull_request:
+    paths-ignore:
+      - '**.md'
+      - '**.svg'
+
     branches:
       - main
   push:
+    paths-ignore:
+      - '**.md'
+      - '**.svg'
+
     branches:
       - main
       - 'feature/**'

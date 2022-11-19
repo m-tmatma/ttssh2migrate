@@ -63,6 +63,8 @@ jobs:
         with:
           path: ${{env.svn-org}}
           key: ${{env.cache-version}}-ttssh2-r${{env.revision}}
+          restore-keys: |
+            ${{env.cache-version}}-ttssh2-r10366
 
       - name: mirror
         run: |

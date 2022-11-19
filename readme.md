@@ -56,7 +56,8 @@ https://github.com/svn-all-fast-export/svn2git を利用して、svn から git 
 
 ## 制限事項
 
-r1304 に追加された `/teraterm/branches/avendor/source/ttdlg/･ｳ･ﾔ｡ｼ ｡ﾁ ttpdlg.rc` を除外できない。
+* r1304 に追加された `/teraterm/branches/avendor/source/ttdlg/･ｳ･ﾔ｡ｼ ｡ﾁ ttpdlg.rc` を除外できない。
+*  ([svn-all-fast-export](https://manpages.ubuntu.com/manpages/trusty/man1/svn-all-fast-export.1.html) で `--identity-map` を渡してないため) ユーザー名に `@localhost` が付与される
 
 ## リビジョングラフ
 

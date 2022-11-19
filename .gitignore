@@ -3,5 +3,6 @@
 /workdir/gitdir
 /workdir/.lesshst
 /workdir/.subversion/
+/workdir/*.txt
 *.svndmp
 .bash_history

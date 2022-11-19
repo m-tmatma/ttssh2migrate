@@ -48,4 +48,7 @@ svn-all-fast-export は apt でインストールする。
 
 [migrate.sh](migrate.sh) を使う。
 
+## 制限事項
+
+r1304 に追加された `/teraterm/branches/avendor/source/ttdlg/･ｳ･ﾔ｡ｼ ｡ﾁ ttpdlg.rc` を除外できない。
 

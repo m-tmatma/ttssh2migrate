@@ -14,6 +14,7 @@ svnadmin dump $SRC_REPO  | \
         "/Attic" \
         | \
     svndumpfilter exclude \
+        --pattern "*.plg" \
         --pattern "*.opt" \
         --pattern "*.ncb" \
         --pattern "*.res" \

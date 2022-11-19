@@ -10,10 +10,10 @@ rm -rf $DST_REPO
 svnadmin create $DST_REPO
 svnadmin dump $SRC_REPO  | \
     svndumpfilter exclude \
-        "･ｳ･ﾔ｡ｼ ｡ﾁ ttpdlg.rc" \
         "/Attic" \
         | \
     svndumpfilter exclude \
+        --pattern "･ｳ･ﾔ｡ｼ ｡ﾁ ttpdlg.rc" \
         --pattern "*.plg" \
         --pattern "*.opt" \
         --pattern "*.ncb" \

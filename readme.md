@@ -37,6 +37,7 @@ https://github.com/svn-all-fast-export/svn2git を利用して、svn から git 
 ### svn sync
 
 `svn sync` を利用してリモートにあるリポジトリをローカルに取得する。
+
 [1.mirror-ttssh2.sh](1.mirror-ttssh2.sh) を使う。
 
 ### svndumpfilter

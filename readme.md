@@ -42,7 +42,7 @@ https://github.com/svn-all-fast-export/svn2git を利用して、svn から git 
 
 ### svndumpfilter
 
-* svnadmin dump` でダンプファイルを出力する。
+* `svnadmin dump` でダンプファイルを出力する。
 * パイプでつないで、`svndumpfilter` で不要なファイルをフィルタリングする。
 * パイプでつないで、`svnadmin load` で別のリポジトリにコミットする。
 

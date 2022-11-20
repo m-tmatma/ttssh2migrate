@@ -52,7 +52,7 @@ jobs:
       - name: Get the youngest revision
         id: get_revision
         run: |
-          REVISION=$(svn info  --no-newline --show-item revision http://svn.osdn.net/svnroot/ttssh2/)
+          REVISION=$(svn info  --no-newline --show-item revision http://svn.osdn.net/svnroot/ttssh2/ )
           echo "revision=$REVISION" >> $GITHUB_ENV
           cat  $GITHUB_ENV
 

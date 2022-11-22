@@ -128,10 +128,6 @@ jobs:
         run: |
           ./migrate.sh
 
-      - name: show committers
-        run: |
-          git -C workdir/gitdir/ttssh2 shortlog -e -s -n
-
       - name: artifacts migration log
         uses: actions/upload-artifact@v3
         if: always()

@@ -9,8 +9,11 @@ rm   -rf $GIT_ROOT
 mkdir -p $GIT_ROOT
 cd       $GIT_ROOT
 
+$SCRIPT_DIR/make-identity-map.py $SCRIPT_DIR/user-list.csv $SCRIPT_DIR/identity-map
+
 svn-all-fast-export \
     --rules $SCRIPT_DIR/input.rules \
+    --identity-map  $SCRIPT_DIR/identity-map \
     --add-metadata \
     --svn-branches \
     --debug-rules \

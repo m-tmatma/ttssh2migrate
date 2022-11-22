@@ -6,3 +6,4 @@
 /workdir/*.txt
 *.svndmp
 .bash_history
+identity-map

@@ -129,9 +129,8 @@ jobs:
           ./migrate.sh
 
       - name: show committers
-        working-directory: workdir/gitdir/ttssh2
         run: |
-          git shortlog -e -s -n
+          git -C workdir/gitdir/ttssh2 shortlog -e -s -n
 
       - name: artifacts migration log
         uses: actions/upload-artifact@v3

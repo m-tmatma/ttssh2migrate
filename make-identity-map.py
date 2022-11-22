@@ -3,6 +3,10 @@
 import sys
 import csv
 
+if len(sys.argv) != 3:
+    print(f"{sys.argv[0]} input.csv output-identity-map")
+    sys.exit(1)
+
 input = sys.argv[1]
 output = sys.argv[2]
 

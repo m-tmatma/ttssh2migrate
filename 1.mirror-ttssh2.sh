@@ -5,6 +5,11 @@ WORKDIR=$SCRIPT_DIR/workdir
 SRC_REPO=$WORKDIR/ttssh2.org
 URL=file://$SRC_REPO
 
+QUIET=
+if [ x"$CI" = x"true" ]; then
+    QUIET=--quiet
+fi
+
 cd $SCRIPT_DIR
 if [ ! -f $SRC_REPO/format ]; then
     svnadmin create $SRC_REPO
@@ -22,4 +27,4 @@ fi
 
 cd $SRC_REPO
 echo "Running: svnsync sync"
-svnsync sync -q $URL
+svnsync sync $QUIET $URL

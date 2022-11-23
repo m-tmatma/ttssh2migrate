@@ -8,7 +8,7 @@ SRC_REPO=$WORKDIR/ttssh2.org
 DST_REPO=$WORKDIR/ttssh2
 rm -rf $DST_REPO
 svnadmin create $DST_REPO
-svnadmin dump $SRC_REPO  | \
+svnadmin dump -q $SRC_REPO  | \
     svndumpfilter exclude \
         "/Attic" \
         | \
@@ -24,4 +24,4 @@ svnadmin dump $SRC_REPO  | \
         --pattern "*.suo" \
         --pattern "*.sbr" \
         | \
-    svnadmin load $DST_REPO
+    svnadmin load -q $DST_REPO

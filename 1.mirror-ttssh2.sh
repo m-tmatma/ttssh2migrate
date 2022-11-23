@@ -22,4 +22,4 @@ fi
 
 cd $SRC_REPO
 echo "Running: svnsync sync"
-svnsync sync $URL
+svnsync sync -q $URL

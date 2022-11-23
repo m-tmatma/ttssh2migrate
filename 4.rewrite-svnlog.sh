@@ -11,7 +11,7 @@ YOUNGEST=$(svnlook youngest $DST_REPO)
 echo $YOUNGEST
 for rev in `seq 1 $YOUNGEST`
 do
-    echo processing $rev
+    #echo processing $rev
     svnlook log -r $rev $DST_REPO > $WORKDIR/revlog-org.txt
     cat  $WORKDIR/revlog-org.txt | \
         python3 -c 'import sys,re; [print(re.sub(r"r(\d+)",r"https://osdn.net/projects/ttssh2/scm/svn/commits/\1",l),end="") for l in sys.stdin]' | \

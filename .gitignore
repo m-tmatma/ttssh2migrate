@@ -4,6 +4,7 @@
 /workdir/.lesshst
 /workdir/.subversion/
 /workdir/*.txt
+/workdir/*.log
 *.svndmp
 .bash_history
 identity-map

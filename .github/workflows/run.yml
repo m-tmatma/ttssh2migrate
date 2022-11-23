@@ -114,6 +114,10 @@ jobs:
         run: |
           ./3.svnlog.sh
 
+      - name: svn log rewrite
+        run: |
+          ./4.rewrite-svnlog.sh
+
       - name: artifacts SVN log
         uses: actions/upload-artifact@v3
         with:

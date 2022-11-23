@@ -12,6 +12,7 @@ sudo apt install -y svn-all-fast-export
 ./1.mirror-ttssh2.sh
 ./2.filter-svndmp.sh
 ./3.svnlog.sh
+./4.rewrite-svnlog.sh
 ./migrate.sh
 ```
 

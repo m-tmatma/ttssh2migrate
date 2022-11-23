@@ -112,8 +112,7 @@ jobs:
 
       - name: svn log
         run: |
-          svn log -v file://$(pwd)/${{env.svn-org}} > workdir/svn-org.log
-          svn log -v file://$(pwd)/${{env.svn-new}} > workdir/svn-new.log
+          ./3.svnlog.sh
 
       - name: artifacts SVN log
         uses: actions/upload-artifact@v3

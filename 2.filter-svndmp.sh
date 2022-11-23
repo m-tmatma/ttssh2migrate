@@ -3,12 +3,17 @@
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 cd $SCRIPT_DIR
 
+QUIET=
+if [ x"$CI" = x"true" ]; then
+    QUIET=--quiet
+fi
+
 WORKDIR=$SCRIPT_DIR/workdir
 SRC_REPO=$WORKDIR/ttssh2.org
 DST_REPO=$WORKDIR/ttssh2
 rm -rf $DST_REPO
 svnadmin create $DST_REPO
-svnadmin dump -q $SRC_REPO  | \
+svnadmin dump $QUIET $SRC_REPO  | \
     svndumpfilter exclude \
         "/Attic" \
         | \
@@ -24,4 +29,4 @@ svnadmin dump -q $SRC_REPO  | \
         --pattern "*.suo" \
         --pattern "*.sbr" \
         | \
-    svnadmin load -q $DST_REPO
+    svnadmin load $QUIET $DST_REPO

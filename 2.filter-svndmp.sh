@@ -13,7 +13,7 @@ svnadmin dump $SRC_REPO  | \
         "/Attic" \
         | \
     svndumpfilter exclude \
-        --pattern "･ｳ･ﾔ｡ｼ ｡ﾁ ttpdlg.rc" \
+        --pattern "* ttpdlg.rc" \
         --pattern "*.plg" \
         --pattern "*.opt" \
         --pattern "*.ncb" \

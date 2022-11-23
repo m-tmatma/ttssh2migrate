@@ -14,8 +14,8 @@ do
     #echo processing $rev
     svnlook log -r $rev $DST_REPO > $WORKDIR/revlog-org.txt
     cat  $WORKDIR/revlog-org.txt | \
-        python3 -c 'import sys,re; [print(re.sub(r"r(\d+)",r"https://osdn.net/projects/ttssh2/scm/svn/commits/\1",l),end="") for l in sys.stdin]' | \
-        python3 -c 'import sys,re; [print(re.sub(r"#(\d+)",r"https://osdn.net/projects/ttssh2/ticket/\1"         ,l),end="") for l in sys.stdin]' > $WORKDIR/revlog-new.txt
+        python3 -c 'import sys,re; [print(re.sub(r"\br(\d+)\b",r"https://osdn.net/projects/ttssh2/scm/svn/commits/\1",l),end="") for l in sys.stdin]' | \
+        python3 -c 'import sys,re; [print(re.sub(r"\b#(\d+)\b",r"https://osdn.net/projects/ttssh2/ticket/\1"         ,l),end="") for l in sys.stdin]' > $WORKDIR/revlog-new.txt
 
     diff $WORKDIR/revlog-org.txt $WORKDIR/revlog-new.txt
     if [ $? -ne 0 ]; then

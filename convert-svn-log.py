@@ -20,6 +20,7 @@ for line in sys.stdin:
         revs = re.split(r'\s*-\s*', matched)
         for rev in revs:
             allRevs.add(rev.replace("r", ""))
+        sys.stderr.write(f"match rev: {line}\n")
 
     r = re.finditer(r"(\w*)#(\d+)((?=[^0-9-&/=@_])|$)", line)
     for m in r:
@@ -27,8 +28,9 @@ for line in sys.stdin:
         issue  = m.group(2)
         if prefix == "" or prefix == "SVN":
             allIssues.add(issue.replace("#", ""))
+            sys.stderr.write(f"match issue: {line}\n")
         else:
-            sys.stderr.write(f"ignore: {line}\n")
+            sys.stderr.write(f"ignore issue: {line}\n")
 
 if allRevs:
     # print empty line for paragraph.

@@ -24,6 +24,7 @@ do
     if [ $? -ne 0 ]; then
         echo replacing log for $rev
         svnadmin setlog --bypass-hooks $DST_REPO -r $rev $DST_LOG
+        echo ------------------------------- $rev -----------------------------------------------
     fi
 done
 

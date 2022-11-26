@@ -9,7 +9,7 @@ for line in sys.stdin:
         matched = m.group(0)
         revs = re.split(r'\s*-\s*', matched)
         for rev in revs:
-            allRevs.add(rev)
+            allRevs.add(rev.replace("r", ""))
     print(line.rstrip("\r").rstrip("\n"))
 
 if allRevs:

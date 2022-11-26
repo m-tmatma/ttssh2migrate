@@ -6,19 +6,13 @@ cd $SCRIPT_DIR
 WORKDIR=$SCRIPT_DIR/workdir
 SRC_REPO=$WORKDIR/ttssh2.org
 DST_REPO=$WORKDIR/ttssh2
-SRC_LOG_DIR=$WORKDIR/ttssh2.srclog
-DST_LOG_DIR=$WORKDIR/ttssh2.dstlog
-
-rm   -rf $SRC_LOG_DIR $DST_LOG_DIR
-mkdir -p $SRC_LOG_DIR
-mkdir -p $DST_LOG_DIR
 
 YOUNGEST=$(svnlook youngest $DST_REPO)
 echo $YOUNGEST
 for rev in `seq 1 $YOUNGEST`
 do
-    SRC_LOG=$SRC_LOG_DIR/r$rev.log
-    DST_LOG=$DST_LOG_DIR/r$rev.log
+    SRC_LOG=$(mktemp)
+    DST_LOG=$(mktemp)
 
     #echo processing $rev
     svnlook log -r $rev $DST_REPO > $SRC_LOG

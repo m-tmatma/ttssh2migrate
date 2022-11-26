@@ -27,7 +27,8 @@ env:
   retention-days: 2
   LANG: "ja_JP.UTF-8"
   svn-org: workdir/ttssh2.org
-  svn-new: workdir/ttssh2
+  svn-step2: workdir/ttssh2.step2
+  svn-final: workdir/ttssh2
 
 jobs:
   build:
@@ -80,14 +81,14 @@ jobs:
 
       - name: create dir for svn filtered (This is for the first time build.)
         run: |
-          mkdir -p ${{env.svn-new}}
+          mkdir -p ${{env.svn-step2}}
 
       - name: Cache svn filtered
         id: cache-svn-filtered
         uses: actions/cache@v3
         with:
-          path: ${{env.svn-new}}
-          key: ${{env.cache-version}}-ttssh2-r${{env.revision}}-${{ hashFiles('2.filter-svndmp.sh', 'make-identity-map.py', 'user-list.csv', '4.rewrite-svnlog.sh') }}
+          path: ${{env.svn-step2}}
+          key: ${{env.cache-version}}-ttssh2-svn-filtered-r${{env.revision}}-${{ hashFiles('2.filter-svndmp.sh', 'make-identity-map.py', 'user-list.csv') }}
 
       - name: filter svn dump
         if: ${{ steps.cache-svn-filtered.outputs.cache-hit != 'true' }}
@@ -98,12 +99,24 @@ jobs:
         run: |
           ./3.svnlog.sh
 
+      - name: create dir for svn final (This is for the first time build.)
+        run: |
+          mkdir -p ${{env.svn-final}}
+
+      - name: Cache svn filtered
+        id: cache-svn-final
+        uses: actions/cache@v3
+        with:
+          path: ${{env.svn-final}}
+          key: ${{env.cache-version}}-ttssh2-svn-final-r${{env.revision}}-${{ hashFiles('2.filter-svndmp.sh', 'convert-svn-log.py', 'make-identity-map.py', 'user-list.csv', '4.rewrite-svnlog.sh') }}
+
       - name: svn log rewrite
+        if: ${{ steps.cache-svn-final.outputs.cache-hit != 'true' }}
         run: |
           ./4.rewrite-svnlog.sh
 
       - name: archive SVN
-        if: ${{ steps.cache-svn-filtered.outputs.cache-hit != 'true' }}
+        if: ${{ steps.cache-svn-final.outputs.cache-hit != 'true' }}
         working-directory: workdir
         run: |
           tar cfj ttssh2-svn.tar.bz2      ttssh2

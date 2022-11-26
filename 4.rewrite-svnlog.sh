@@ -27,7 +27,7 @@ do
     fi
 done
 
-svn log -v file://$DST_REPO > $WORKDIR/svn-new-rewrite.log
+svn log -v file://$DST_REPO > $WORKDIR/svn-step2-rewrite.log
 
 # change parent directory of $DST_REPO and archive it.
 (cd $DST_REPO/.. && tar cfz $WORKDIR/ttssh2-svn-4-writelog.tar.gz $(basename $DST_REPO) )

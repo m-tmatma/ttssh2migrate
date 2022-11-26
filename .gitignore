@@ -1,5 +1,7 @@
 /workdir/ttssh2
 /workdir/ttssh2.org
+/workdir/ttssh2.*
+/workdir/*.tar.gz
 /workdir/gitdir
 /workdir/.lesshst
 /workdir/.subversion/

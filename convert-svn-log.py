@@ -5,13 +5,14 @@ import re
 allRevs = set()
 allIssues = set()
 for line in sys.stdin:
+    print(line.rstrip("\r").rstrip("\n"))
+
     r = re.finditer(r"(r(\d+)\s*-\s*r(\d+))|(r(\d+)((?=[^0-9-&/=@_])|$))", line)
     for m in r:
         matched = m.group(0)
         revs = re.split(r'\s*-\s*', matched)
         for rev in revs:
             allRevs.add(rev.replace("r", ""))
-    print(line.rstrip("\r").rstrip("\n"))
 
     r = re.finditer(r"(\w*)#(\d+)((?=[^0-9-&/=@_])|$)", line)
     for m in r:

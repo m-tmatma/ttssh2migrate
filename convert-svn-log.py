@@ -26,12 +26,12 @@ if allRevs:
     # print empty line for paragraph.
     print("")
     print("Revisions:")
-    for rev in sorted(list(allRevs)):
+    for rev in sorted(list(allRevs), key=int):
         print(f"* https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
 
 if allIssues:
     # print empty line for paragraph.
     print("")
     print("Issues:")
-    for issue in sorted(list(allIssues)):
+    for issue in sorted(list(allIssues), key=int):
         print(f"* https://osdn.net/projects/ttssh2/ticket/{issue}")

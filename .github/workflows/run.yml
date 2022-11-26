@@ -68,6 +68,9 @@ jobs:
           mkdir -p ${{env.svn-step2}}
           mkdir -p ${{env.svn-final}}
 
+      # dependency
+      # * Upstream svn repository
+      #   * Revision                        : ${{env.revision}}
       - name: Cache svn original
         id: cache-svn
         uses: actions/cache@v3
@@ -81,6 +84,13 @@ jobs:
         run: |
           ./1.mirror-ttssh2.sh
 
+      # dependency
+      # * Upstream svn repository
+      #   * Revision                        : ${{env.revision}}
+      # * filtered svn repository
+      #   * script to filter svn dump       : '2.filter-svndmp.sh'
+      #   * script to create user map       : 'make-identity-map.py'
+      #   * input data user map             : 'user-list.csv'
       - name: Cache svn filtered
         id: cache-svn-filtered
         uses: actions/cache@v3
@@ -97,12 +107,22 @@ jobs:
         run: |
           ./3.svnlog.sh
 
+      # dependency
+      # * Upstream svn repository
+      #   * Revision                        : ${{env.revision}}
+      # * filtered svn repository
+      #   * script to filter svn dump       : '2.filter-svndmp.sh'
+      #   * script to create user map       : 'make-identity-map.py'
+      #   * input data user map             : 'user-list.csv'
+      # * mangled svn repository
+      #   * shell script to mangle svn log  : '4.rewrite-svnlog.sh'
+      #   * script to mangle svn log        : 'convert-svn-log.py'
       - name: Cache svn final
         id: cache-svn-final
         uses: actions/cache@v3
         with:
           path: ${{env.svn-final}}
-          key: ${{env.cache-version}}-ttssh2-svn-final-r${{env.revision}}-${{ hashFiles('2.filter-svndmp.sh', 'convert-svn-log.py', 'make-identity-map.py', 'user-list.csv', '4.rewrite-svnlog.sh') }}
+          key: ${{env.cache-version}}-ttssh2-svn-final-r${{env.revision}}-${{ hashFiles('2.filter-svndmp.sh', 'make-identity-map.py', 'user-list.csv', '4.rewrite-svnlog.sh', 'convert-svn-log.py') }}
 
       - name: svn log rewrite
         if: ${{ steps.cache-svn-final.outputs.cache-hit != 'true' }}

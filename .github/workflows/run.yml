@@ -117,7 +117,7 @@ jobs:
 
       - name: artifacts SVN repository
         uses: actions/upload-artifact@v3
-        if: ${{ steps.cache-svn-filtered.outputs.cache-hit != 'true' }}
+        if: ${{ steps.cache-svn-final.outputs.cache-hit != 'true' }}
         with:
           name: artifacts-SVN-build-${{github.run_number}}-${{github.run_id}}
           path: |

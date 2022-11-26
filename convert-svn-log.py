@@ -14,7 +14,7 @@ for line in sys.stdin:
         #sys.stderr.write(f"ignore: {line}\n")
         continue
 
-    r = re.finditer(r"\b(r(\d+)\s*-\s*r(\d+))|\b(r(\d+)((?=[^a-zA-Z0-9-&/=@_])|$))", line)
+    r = re.finditer(r"(r(\d+)\s*-\s*r(\d+))|(r(\d+)((?=[^0-9-&/=@_])|$))", line)
     for m in r:
         matched = m.group(0)
         revs = re.split(r'\s*-\s*', matched)
@@ -22,7 +22,7 @@ for line in sys.stdin:
             allRevs.add(rev.replace("r", ""))
         sys.stderr.write(f"match rev: {line}\n")
 
-    r = re.finditer(r"(\w*)#(\d+)((?=[^a-zA-Z0-9-&/=@_])|$)", line)
+    r = re.finditer(r"(\w*)#(\d+)((?=[^0-9-&/=@_])|$)", line)
     for m in r:
         prefix = m.group(1)
         issue  = m.group(2)

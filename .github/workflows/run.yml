@@ -62,9 +62,11 @@ jobs:
         run: |
           echo "${{env.revision}}"
 
-      - name: create dir for svn original (This is for the first time build.)
+      - name: create cache directories. (This is for the first time build.)
         run: |
           mkdir -p ${{env.svn-org}}
+          mkdir -p ${{env.svn-step2}}
+          mkdir -p ${{env.svn-final}}
 
       - name: Cache svn original
         id: cache-svn
@@ -78,10 +80,6 @@ jobs:
       - name: mirror
         run: |
           ./1.mirror-ttssh2.sh
-
-      - name: create dir for svn filtered (This is for the first time build.)
-        run: |
-          mkdir -p ${{env.svn-step2}}
 
       - name: Cache svn filtered
         id: cache-svn-filtered
@@ -98,10 +96,6 @@ jobs:
       - name: svn log
         run: |
           ./3.svnlog.sh
-
-      - name: create dir for svn final (This is for the first time build.)
-        run: |
-          mkdir -p ${{env.svn-final}}
 
       - name: Cache svn filtered
         id: cache-svn-final

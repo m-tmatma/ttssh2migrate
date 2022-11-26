@@ -14,7 +14,21 @@ for line in sys.stdin:
         #sys.stderr.write(f"ignore: {line}\n")
         continue
 
-    r = re.finditer(r"(r(\d+)\s*-\s*r(\d+))|(r(\d+)((?=[^0-9-&/=@_])|$))", line)
+    # NG: -rXXX
+    # NG: rXXX-
+    # OK: rXXX-rYYY
+    # OK: rXXX - rYYY
+    # OK: (rXXX)
+    # NG: rXXX_
+    # OK: rXXX,
+    # OK:  rXXX (space before and/or after revsion)
+
+    revRange = r"r(\d+)\s*-\s*r(\d+)"
+    revOne   = r"r(\d+)"
+    endMark  = r"((?=[^0-9-&/=@_])|$)"
+    pattern  = "(" + revRange + ")" + "|" + r"(\b" + revOne + endMark  + ")"
+
+    r = re.finditer(pattern, line)
     for m in r:
         matched = m.group(0)
         revs = re.split(r'\s*-\s*', matched)

@@ -22,10 +22,7 @@ do
 
     #echo processing $rev
     svnlook log -r $rev $DST_REPO > $SRC_LOG
-    cat $SRC_LOG | \
-        python3 -c 'import sys,re; [print(re.sub(r"\br(\d+)\b",r"https://osdn.net/projects/ttssh2/scm/svn/commits/\1",l),end="") for l in sys.stdin]' | \
-        python3 -c 'import sys,re; [print(re.sub(r"\b#(\d+)\b",r"https://osdn.net/projects/ttssh2/ticket/\1"         ,l),end="") for l in sys.stdin]' > $DST_LOG
-
+    cat $SRC_LOG | $SCRIPT_DIR/convert-svn-log.py > $DST_LOG
     diff $SRC_LOG $DST_LOG
     if [ $? -ne 0 ]; then
         echo replacing log for $rev

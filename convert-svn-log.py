@@ -19,6 +19,8 @@ for line in sys.stdin:
         issue  = m.group(2)
         if prefix == "" or prefix == "SVN":
             allIssues.add(issue.replace("#", ""))
+        else:
+            sys.stderr.write(f"ignore {line}\n")
 
 if allRevs:
     # print empty line for paragraph.

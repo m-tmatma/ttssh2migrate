@@ -13,10 +13,12 @@ for line in sys.stdin:
             allRevs.add(rev.replace("r", ""))
     print(line.rstrip("\r").rstrip("\n"))
 
-    r = re.finditer(r"(#(\d+))((?=[^0-9-&/=@_])|$)", line)
+    r = re.finditer(r"(\w*)#(\d+)((?=[^0-9-&/=@_])|$)", line)
     for m in r:
-        issue = m.group(0)
-        allIssues.add(issue.replace("#", ""))
+        prefix = m.group(1)
+        issue  = m.group(2)
+        if prefix == "" or prefix == "SVN":
+            allIssues.add(issue.replace("#", ""))
 
 if allRevs:
     # print empty line for paragraph.

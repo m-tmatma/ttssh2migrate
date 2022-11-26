@@ -36,7 +36,8 @@ for line in sys.stdin:
             allRevs.add(rev.replace("r", ""))
         sys.stderr.write(f"match rev: {line}\n")
 
-    r = re.finditer(r"(\w*)#(\d+)((?=[^0-9-&/=@_])|$)", line)
+    # NG: Run-Time Check Failure #3
+    r = re.finditer(r"(\w*)(?<!Run-Time Check Failure )#(\d+)((?=[^0-9-&/=@_])|$)", line)
     for m in r:
         prefix = m.group(1)
         issue  = m.group(2)

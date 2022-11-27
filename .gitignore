@@ -3,6 +3,7 @@
 /workdir/ttssh2.*
 /workdir/*.tar.gz
 /workdir/gitdir
+/workdir/gitdir-repack
 /workdir/.lesshst
 /workdir/.subversion/
 /workdir/*.txt

@@ -20,6 +20,11 @@ svn-all-fast-export \
     --svn-ignore \
     --empty-dirs \
     $SVN_ROOT
+if [ $? -eq 0 ]; then
+    echo svn-all-fast-export: OK
+else
+    echo svn-all-fast-export: NG
+fi
 
 echo rename defaut branch to main
 git branch -m main

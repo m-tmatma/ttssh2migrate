@@ -10,7 +10,7 @@ fi
 
 WORKDIR=$SCRIPT_DIR/workdir
 SRC_REPO=$WORKDIR/ttssh2.org
-DST_REPO=$WORKDIR/ttssh2
+DST_REPO=$WORKDIR/ttssh2.step2
 rm -rf $DST_REPO
 svnadmin create $DST_REPO
 svnadmin dump $QUIET $SRC_REPO  | \
@@ -30,3 +30,6 @@ svnadmin dump $QUIET $SRC_REPO  | \
         --pattern "*.sbr" \
         | \
     svnadmin load $QUIET $DST_REPO
+
+# change parent directory of $DST_REPO and archive it.
+(cd $DST_REPO/.. && tar cfz $WORKDIR/ttssh2-svn-2-filtered.tar.gz $(basename $DST_REPO) )

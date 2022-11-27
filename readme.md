@@ -12,18 +12,22 @@ sudo apt install -y svn-all-fast-export
 ./1.mirror-ttssh2.sh
 ./2.filter-svndmp.sh
 ./3.svnlog.sh
+./4.rewrite-svnlog.sh
 ./migrate.sh
 ```
 
 ### 成果物
 
-|  説明  | パス  | GitHub Actions の artifacts でダウンロード  |
-| ---- | ---- | ---- |
-|  gitリポジトリ  |  `workdir/gitdir/ttssh2`  | 〇  |
-|  フィルター後のsvnリポジトリ  |  `workdir/ttssh2`   | 〇  |
-|  オリジナルsvnリポジトリ  |  `workdir/ttssh2.org`  | × (省略) |
-|  フィルター後のsvnリポジトリの `svn log`  |  `workdir/ttssh2`   | 〇  |
-|  オリジナルsvnリポジトリの `svn log`  |  `workdir/ttssh2.org`  | 〇  |
+|  説明                                     | パス                             | GitHub Actions の artifacts でダウンロード  |
+| ----                                      | ----                             | ----                                        |
+|  svnリポジトリ(オリジナル)                |  `workdir/ttssh2.org`            | × (省略)                                   |
+|  svnリポジトリ(フィルター後)              |  `workdir/ttssh2.step2`          | × (省略)                                   |
+|  svnリポジトリ(ログ書き換え)              |  `workdir/ttssh2`                | 〇                                          |
+|  `svn log` (オリジナル)                   |  `workdir/svn-org.log`           | 〇                                          |
+|  `svn log` (フィルター後)                 |  `workdir/svn-step2.log`         | 〇                                          |
+|  `svn log` (ログ書き換え)                 |  `workdir/svn-step4-rewrite.log` | 〇                                          |
+|  gitリポジトリ                            |  `workdir/gitdir/ttssh2`         | 〇                                          |
+
 
 ## 仕組み
 
@@ -48,6 +52,20 @@ https://github.com/svn-all-fast-export/svn2git を利用して、svn から git 
 * パイプでつないで、`svnadmin load` で別のリポジトリにコミットする。
 
 [2.filter-svndmp.sh](2.filter-svndmp.sh) を使う。
+
+### svn log
+
+オリジナルとフィルタリングした SVN のログを取得する。
+
+[3.svnlog.sh](3.svnlog.sh) を使う。
+
+### `svnlook log` & `svnadmin setlog`
+
+* `svnlook log` でログを取得する゜
+* [convert-svn-log.py](convert-svn-log.py) でログを修正する (revision, issue をリンクに変換して追記)
+* `svnadmin setlog` でログを書き換える
+
+[4.rewrite-svnlog.sh](4.rewrite-svnlog.sh) を使う。
 
 ### svn-all-fast-export
 

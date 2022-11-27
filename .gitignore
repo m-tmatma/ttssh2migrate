@@ -10,3 +10,4 @@
 *.svndmp
 .bash_history
 identity-map
+artifacts-*

@@ -11,6 +11,8 @@ mkdir -p $GIT_ROOT_REPACK
 du -h $GIT_ROOT/ttssh2
 
 cp   -a $GIT_ROOT/ttssh2 $GIT_ROOT_REPACK/
+
+# See https://techbase.kde.org/Projects/MoveToGit/UsingSvn2Git for `git repack`
 git  -C $GIT_ROOT_REPACK/ttssh2 repack -a -d -f --window=250 --depth=250
 
 du -h $GIT_ROOT_REPACK/ttssh2

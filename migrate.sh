@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 WORKDIR=$SCRIPT_DIR/workdir
@@ -20,11 +20,6 @@ svn-all-fast-export \
     --svn-ignore \
     --empty-dirs \
     $SVN_ROOT
-if [ $? -eq 0 ]; then
-    echo svn-all-fast-export: OK
-else
-    echo svn-all-fast-export: NG
-fi
 
 echo rename defaut branch to main
 git -C $GIT_ROOT/ttssh2 branch -m main

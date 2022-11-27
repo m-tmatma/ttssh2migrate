@@ -16,19 +16,6 @@ sudo apt install -y svn-all-fast-export
 ./migrate.sh
 ```
 
-### 成果物
-
-|  説明                                     | パス                             | GitHub Actions の artifacts でダウンロード  |
-| ----                                      | ----                             | ----                                        |
-|  svnリポジトリ(オリジナル)                |  `workdir/ttssh2.org`            | × (省略)                                   |
-|  svnリポジトリ(フィルター後)              |  `workdir/ttssh2.step2`          | × (省略)                                   |
-|  svnリポジトリ(ログ書き換え)              |  `workdir/ttssh2`                | 〇                                          |
-|  `svn log` (オリジナル)                   |  `workdir/svn-org.log`           | 〇                                          |
-|  `svn log` (フィルター後)                 |  `workdir/svn-step2.log`         | 〇                                          |
-|  `svn log` (ログ書き換え)                 |  `workdir/svn-step4-rewrite.log` | 〇                                          |
-|  gitリポジトリ                            |  `workdir/gitdir/ttssh2`         | 〇                                          |
-
-
 ## 仕組み
 
 https://github.com/svn-all-fast-export/svn2git を利用して、svn から git への変換を行う。
@@ -83,4 +70,84 @@ https://github.com/svn-all-fast-export/svn2git を利用して、svn から git 
 リンクを押したあと RAW を選ぶ。
 グラフが巨大なのでスクロールして確認したところに移動する。
 
+## 成果物のダウンロード
+
+* [GitHub CLI](https://cli.github.com/) を使うとコマンドラインで成果物をダウンロードできる。
+*  コマンドで workflow  の列挙ができる。
+* Tera Term 4.106 で Linux などに接続して gh を実行する場合 ** `⢿` や `✓ ` は文字化けして `?` のように表示される。**
+
+### 成果物
+
+|  説明                                     | パス                             | GitHub Actions の artifacts でダウンロード  |
+| ----                                      | ----                             | ----                                        |
+|  svnリポジトリ(オリジナル)                |  `workdir/ttssh2.org`            | × (省略)                                   |
+|  svnリポジトリ(フィルター後)              |  `workdir/ttssh2.step2`          | × (省略)                                   |
+|  svnリポジトリ(ログ書き換え)              |  `workdir/ttssh2`                | 〇                                          |
+|  `svn log` (オリジナル)                   |  `workdir/svn-org.log`           | 〇                                          |
+|  `svn log` (フィルター後)                 |  `workdir/svn-step2.log`         | 〇                                          |
+|  `svn log` (ログ書き換え)                 |  `workdir/svn-step4-rewrite.log` | 〇                                          |
+|  gitリポジトリ                            |  `workdir/gitdir/ttssh2`         | 〇                                          |
+
+### 準備
+
+* [GitHub CLI](https://cli.github.com/) からダウンロードしてインストールする。(Windows, Linux どちらでも OK)
+* [gh auth login](https://cli.github.com/manual/gh_auth_login) で GitHub にログインする
+
+```
+gh auth login
+```
+### workflow  の列挙
+
+[gh run list](https://cli.github.com/manual/gh_run_list) で最近の workflow を列挙する。
+この中で、ダウンロードしたいビルドの `ID` をメモる。
+
+#### 該当リポジトリと同じディレクトリで実行する場合
+
+```
+gh run list
+```
+
+#### 該当リポジトリと異なるディレクトリで実行する場合
+
+```
+gh -R m-tmatma/ttssh2migrate run list
+```
+
+具体例
+
+```
+$ gh -R m-tmatma/ttssh2migrate run list
+STATUS  TITLE                           WORKFLOW  BRANCH                          EVENT         ID          ELAPSED  AGE
+✓       Run                             Run       main                            schedule      3556843090  9m30s    52m
+               ...
+```
+
+
+### 成果物のダウンロード
+
+* [gh run download](https://cli.github.com/manual/gh_run_download) コマンドで成果物をダウンロードできる。
+
+#### ダウンロードの進捗表示
+
+* gh で成果物をダウンロードする場合、`⢿` のような文字で進捗表示される。(処理が終わると消える。)
+* Tera Term 4.106 で接続して gh を実行する場合は`⢿` のように表示されず `?` のように表示される。
+
+
+#### `ID 3556843090` の成果物をダウンロードする場合
+
+```
+gh run download 3556843090
+```
+
+#### `ID 3556843090` で名前に `GIT` を含む成果物をダウンロードする場合
+
+```
+gh run download 3556843090 -p "*GIT*"
+```
+
+#### `ID 3556843090` で名前に `GIT` を含む成果物を指定したディレクトリ(`artifacts-3556843090`) にダウンロードする場合
+
+```
+gh run -D artifacts-3556843090 download 3556843090 -p "*GIT*"
+```
 

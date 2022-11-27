@@ -14,6 +14,7 @@ sudo apt install -y svn-all-fast-export
 ./3.svnlog.sh
 ./4.rewrite-svnlog.sh
 ./migrate.sh
+./git-repack.sh
 ```
 
 ## 仕組み

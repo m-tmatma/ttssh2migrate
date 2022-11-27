@@ -158,6 +158,10 @@ jobs:
         run: |
           ./migrate.sh
 
+      - name: git repack
+        run: |
+          ./git-repack.sh
+
       - name: artifacts migration log
         uses: actions/upload-artifact@v3
         if: always()
@@ -184,7 +188,7 @@ jobs:
           retention-days: ${{env.retention-days}}
 
       - name: archive GIT
-        working-directory: workdir/gitdir
+        working-directory: workdir/gitdir-repack
         run: |
           tar cfj ttssh2-git.tar.bz2      ttssh2
 
@@ -193,6 +197,6 @@ jobs:
         with:
           name: artifacts-GIT-build-${{github.run_number}}-${{github.run_id}}
           path: |
-            workdir/gitdir/**.tar.bz2
+            workdir/gitdir-repack/**.tar.bz2
           # See https://github.com/actions/upload-artifact#retention-period
           retention-days: ${{env.retention-days}}

@@ -74,7 +74,7 @@ https://github.com/svn-all-fast-export/svn2git を利用して、svn から git 
 
 * [GitHub CLI](https://cli.github.com/) を使うとコマンドラインで成果物をダウンロードできる。
 *  コマンドで workflow  の列挙ができる。
-* Tera Term 4.106 で Linux などに接続して gh を実行する場合 ** `⢿` や `✓ ` は文字化けして `?` のように表示される。**
+* Tera Term 4.106 で Linux などに接続して gh を実行する場合 `⢿` や `✓ ` は文字化けして `?` のように表示される。
 
 ### 成果物
 

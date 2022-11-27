@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 WORKDIR=$SCRIPT_DIR/workdir
@@ -20,3 +20,5 @@ svn-all-fast-export \
     --svn-ignore \
     --empty-dirs \
     $SVN_ROOT
+
+git branch -m main

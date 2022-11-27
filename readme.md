@@ -75,7 +75,7 @@ https://github.com/svn-all-fast-export/svn2git を利用して、svn から git 
 
 ## 制限事項
 
-*  ([svn-all-fast-export](https://manpages.ubuntu.com/manpages/trusty/man1/svn-all-fast-export.1.html) で仮の値として svn ユーザー名と git の committer の対応関係を渡して変換している。 (`user-list.csv` に svn ユーザーとメールアドレスの対応関係を記載すると変換テーブルを生成する)
+*  ([svn-all-fast-export](https://manpages.ubuntu.com/manpages/trusty/man1/svn-all-fast-export.1.html) で仮の値として [user-list.csv](user-list.csv) をもとに [make-identity-map.py](make-identity-map.py) で `identity-map` (svn ユーザー名と git の committer の対応関係) を生成して を渡して変換している。
 
 ## リビジョングラフ
 

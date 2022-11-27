@@ -15,6 +15,11 @@ sudo apt install -y svn-all-fast-export
 ./4.rewrite-svnlog.sh
 ./migrate.sh
 ```
+## 成果物のダウンロード
+
+* [GitHub CLI](https://cli.github.com/) を使うとコマンドラインで成果物をダウンロードできる。
+*  コマンドで workflow  の列挙ができる。
+* Tera Term 4.106 で Linux などに接続して gh を実行する場合 ** `⢿` や `✓ ` は文字化けして `?` のように表示される。**
 
 ### 成果物
 
@@ -27,13 +32,6 @@ sudo apt install -y svn-all-fast-export
 |  `svn log` (フィルター後)                 |  `workdir/svn-step2.log`         | 〇                                          |
 |  `svn log` (ログ書き換え)                 |  `workdir/svn-step4-rewrite.log` | 〇                                          |
 |  gitリポジトリ                            |  `workdir/gitdir/ttssh2`         | 〇                                          |
-
-## 成果物のダウンロード
-
-* [GitHub CLI](https://cli.github.com/) を使うとコマンドラインで成果物をダウンロードできる。
-*  コマンドで workflow  の列挙ができる。
-* Tera Term 4.106 で Linux などに接続して gh を実行する場合 ** `⢿` や `✓ ` は文字化けして `?` のように表示される。**
-
 
 ### 準備
 

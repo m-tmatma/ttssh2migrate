@@ -162,7 +162,7 @@ jobs:
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: migration-log-build-${{github.run_number}}-${{github.run_id}}
+          name: artifacts-migration-log-build-${{github.run_number}}-${{github.run_id}}
           path: |
             workdir/gitdir/gitlog-ttssh2
             workdir/gitdir/log-ttssh2
@@ -176,7 +176,7 @@ jobs:
       - name: artifacts filenames
         uses: actions/upload-artifact@v3
         with:
-          name: filenames-build-${{github.run_number}}-${{github.run_id}}
+          name: artifacts-filenames-build-${{github.run_number}}-${{github.run_id}}
           path: |
             workdir/file*.txt
           # See https://github.com/actions/upload-artifact#retention-period

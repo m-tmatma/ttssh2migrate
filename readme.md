@@ -60,6 +60,15 @@ https://github.com/svn-all-fast-export/svn2git を利用して、svn から git 
 
 [migrate.sh](migrate.sh) を使う。
 
+
+### git repack
+
+* `git repack` で git リポジトリサイズを減らす
+
+[git-repack.sh](git-repack.sh) を使う。
+
+https://techbase.kde.org/Projects/MoveToGit/UsingSvn2Git#Checking_for_proper_history_in_the_new_git_repository
+
 ## 制限事項
 
 *  ([svn-all-fast-export](https://manpages.ubuntu.com/manpages/trusty/man1/svn-all-fast-export.1.html) で仮の値として [user-list.csv](user-list.csv) をもとに [make-identity-map.py](make-identity-map.py) で `identity-map` (svn ユーザー名と git の committer の対応関係) を生成して を渡して変換している。

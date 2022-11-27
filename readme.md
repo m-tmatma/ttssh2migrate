@@ -25,7 +25,7 @@ sudo apt install -y svn-all-fast-export
 |  svnリポジトリ(ログ書き換え)              |  `workdir/ttssh2`                | 〇                                          |
 |  `svn log` (オリジナル)                   |  `workdir/svn-org.log`           | 〇                                          |
 |  `svn log` (フィルター後)                 |  `workdir/svn-step2.log`         | 〇                                          |
-|  `svn log` (ログ書き換え)                 |  `workdir/svn-step2-rewrite.log` | 〇                                          |
+|  `svn log` (ログ書き換え)                 |  `workdir/svn-step4-rewrite.log` | 〇                                          |
 |  gitリポジトリ                            |  `workdir/gitdir/ttssh2`         | 〇                                          |
 
 

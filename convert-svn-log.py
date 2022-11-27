@@ -4,6 +4,11 @@ import re
 
 allRevs = set()
 allIssues = set()
+
+revLogMatched = set()
+issueLogMatched = set()
+issueLogUnmatched = set()
+
 for line in sys.stdin:
     line = line.rstrip("\r").rstrip("\n")
     print(line)
@@ -34,7 +39,9 @@ for line in sys.stdin:
         revs = re.split(r'\s*-\s*', matched)
         for rev in revs:
             allRevs.add(rev.replace("r", ""))
-        sys.stderr.write(f"match rev: {line}\n")
+        if line not in revLogMatched:
+            revLogMatched.add(line)
+            sys.stderr.write(f"match rev: {line}\n")
 
     # NG: Run-Time Check Failure #3
     r = re.finditer(r"(\w*)(?<!Run-Time Check Failure )#(\d+)((?=[^0-9-&/=@_])|$)", line)
@@ -43,9 +50,13 @@ for line in sys.stdin:
         issue  = m.group(2)
         if prefix == "" or prefix == "SVN":
             allIssues.add(issue.replace("#", ""))
-            sys.stderr.write(f"match issue: {line}\n")
+            if line not in issueLogMatched:
+                issueLogMatched.add(line)
+                sys.stderr.write(f"match issue: {line}\n")
         else:
-            sys.stderr.write(f"ignore issue: {line}\n")
+            if line not in issueLogUnmatched:
+                issueLogUnmatched.add(line)
+                sys.stderr.write(f"ignore issue: {line}\n")
 
 if allRevs:
     # print empty line for paragraph.

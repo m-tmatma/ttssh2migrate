@@ -16,7 +16,6 @@ $SCRIPT_DIR/svn2git/svn-all-fast-export \
     --rules $SCRIPT_DIR/input.rules \
     --identity-map  $SCRIPT_DIR/identity-map \
     --add-metadata \
-    --svn-branches \
     --debug-rules \
     --svn-ignore \
     --empty-dirs \

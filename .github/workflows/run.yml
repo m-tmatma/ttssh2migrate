@@ -166,6 +166,7 @@ jobs:
           path: |
             workdir/gitdir/gitlog-ttssh2
             workdir/gitdir/log-ttssh2
+            workdir/gitdir/log-migration.log
           # See https://github.com/actions/upload-artifact#retention-period
           retention-days: ${{env.retention-days}}
 

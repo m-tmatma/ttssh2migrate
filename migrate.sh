@@ -11,6 +11,7 @@ cd       $GIT_ROOT
 
 $SCRIPT_DIR/make-identity-map.py $SCRIPT_DIR/user-list.csv $SCRIPT_DIR/identity-map
 
+echo running svn-all-fast-export
 svn-all-fast-export \
     --rules $SCRIPT_DIR/input.rules \
     --identity-map  $SCRIPT_DIR/identity-map \
@@ -19,7 +20,7 @@ svn-all-fast-export \
     --debug-rules \
     --svn-ignore \
     --empty-dirs \
-    $SVN_ROOT
+    $SVN_ROOT > $GIT_ROOT/log-migration.log  2>&1
 
 echo rename defaut branch to main
 git -C $GIT_ROOT/ttssh2 branch -m main

@@ -37,7 +37,7 @@ done
 svn log -v file://$DST_REPO > $WORKDIR/svn-step2-rewrite.log
 
 # change parent directory of $DST_REPO and archive it.
-(cd $DST_REPO/.. && tar cfz $WORKDIR/ttssh2-svn-4-writelog.tar.gz $(basename $DST_REPO) )
+(cd $DST_REPO/.. && tar cfz $WORKDIR/ttssh2-svn-4-rewrite.tar.gz $(basename $DST_REPO) )
 
 # change log directory of $LOG_DIR and archive it.
 (cd $LOG_DIR && tar cfz $WORKDIR/ttssh2-svn-4-log.tar.gz $(basename $SRC_LOG_DIR) $(basename $DST_LOG_DIR) )

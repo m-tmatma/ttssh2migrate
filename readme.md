@@ -53,6 +53,20 @@ https://github.com/svn-all-fast-export/svn2git を利用して、svn から git 
 
 [2.filter-svndmp.sh](2.filter-svndmp.sh) を使う。
 
+### svn log
+
+オリジナルとフィルタリングした SVN のログを取得する。
+
+[3.svnlog.sh](3.svnlog.sh) を使う。
+
+### `svnlook log` & `svnadmin setlog`
+
+* `svnlook log` でログを取得する゜
+* [convert-svn-log.py](convert-svn-log.py) でログを修正する (revision, issue をリンクに変換して追記)
+* `svnadmin setlog` でログを書き換える
+
+[4.rewrite-svnlog.sh](4.rewrite-svnlog.sh) を使う。
+
 ### svn-all-fast-export
 
 * ルールファイル [input.rules](input.rules) を指定して `svn-all-fast-export` で変換する。

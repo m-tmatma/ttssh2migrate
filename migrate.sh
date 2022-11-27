@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 WORKDIR=$SCRIPT_DIR/workdir

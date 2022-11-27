@@ -21,4 +21,5 @@ svn-all-fast-export \
     --empty-dirs \
     $SVN_ROOT
 
+echo rename defaut branch to main
 git branch -m main

@@ -27,4 +27,4 @@ else
 fi
 
 echo rename defaut branch to main
-git branch -m main
+git -C $GIT_ROOT branch -m main

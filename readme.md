@@ -15,6 +15,61 @@ sudo apt install -y svn-all-fast-export
 ./4.rewrite-svnlog.sh
 ./migrate.sh
 ```
+
+## 仕組み
+
+https://github.com/svn-all-fast-export/svn2git を利用して、svn から git への変換を行う。
+
+###  svn-all-fast-export
+
+[svn-all-fast-export](https://manpages.ubuntu.com/manpages/trusty/man1/svn-all-fast-export.1.html) は apt でインストールする。
+
+## 変換手順詳細
+
+### svn sync
+
+`svn sync` を利用してリモートにあるリポジトリをローカルに取得する。
+
+[1.mirror-ttssh2.sh](1.mirror-ttssh2.sh) を使う。
+
+### svndumpfilter
+
+* `svnadmin dump` でダンプファイルを出力する。
+* パイプでつないで、`svndumpfilter` で不要なファイルをフィルタリングする。
+* パイプでつないで、`svnadmin load` で別のリポジトリにコミットする。
+
+[2.filter-svndmp.sh](2.filter-svndmp.sh) を使う。
+
+### svn log
+
+オリジナルとフィルタリングした SVN のログを取得する。
+
+[3.svnlog.sh](3.svnlog.sh) を使う。
+
+### `svnlook log` & `svnadmin setlog`
+
+* `svnlook log` でログを取得する゜
+* [convert-svn-log.py](convert-svn-log.py) でログを修正する (revision, issue をリンクに変換して追記)
+* `svnadmin setlog` でログを書き換える
+
+[4.rewrite-svnlog.sh](4.rewrite-svnlog.sh) を使う。
+
+### svn-all-fast-export
+
+* ルールファイル [input.rules](input.rules) を指定して `svn-all-fast-export` で変換する。
+
+[migrate.sh](migrate.sh) を使う。
+
+## 制限事項
+
+*  ([svn-all-fast-export](https://manpages.ubuntu.com/manpages/trusty/man1/svn-all-fast-export.1.html) で仮の値として [user-list.csv](user-list.csv) をもとに [make-identity-map.py](make-identity-map.py) で `identity-map` (svn ユーザー名と git の committer の対応関係) を生成して を渡して変換している。
+
+## リビジョングラフ
+
+[TortoiseGitによるリビジョングラフ](ttssh2.svg)
+リンクを押したあと RAW を選ぶ。
+グラフが巨大なのでスクロールして確認したところに移動する。
+
 ## 成果物のダウンロード
 
 * [GitHub CLI](https://cli.github.com/) を使うとコマンドラインで成果物をダウンロードできる。
@@ -95,60 +150,4 @@ gh run download 3556843090 -p "*GIT*"
 ```
 gh run -D artifacts-3556843090 download 3556843090 -p "*GIT*"
 ```
-
-
-## 仕組み
-
-https://github.com/svn-all-fast-export/svn2git を利用して、svn から git への変換を行う。
-
-###  svn-all-fast-export
-
-[svn-all-fast-export](https://manpages.ubuntu.com/manpages/trusty/man1/svn-all-fast-export.1.html) は apt でインストールする。
-
-## 変換手順詳細
-
-### svn sync
-
-`svn sync` を利用してリモートにあるリポジトリをローカルに取得する。
-
-[1.mirror-ttssh2.sh](1.mirror-ttssh2.sh) を使う。
-
-### svndumpfilter
-
-* `svnadmin dump` でダンプファイルを出力する。
-* パイプでつないで、`svndumpfilter` で不要なファイルをフィルタリングする。
-* パイプでつないで、`svnadmin load` で別のリポジトリにコミットする。
-
-[2.filter-svndmp.sh](2.filter-svndmp.sh) を使う。
-
-### svn log
-
-オリジナルとフィルタリングした SVN のログを取得する。
-
-[3.svnlog.sh](3.svnlog.sh) を使う。
-
-### `svnlook log` & `svnadmin setlog`
-
-* `svnlook log` でログを取得する゜
-* [convert-svn-log.py](convert-svn-log.py) でログを修正する (revision, issue をリンクに変換して追記)
-* `svnadmin setlog` でログを書き換える
-
-[4.rewrite-svnlog.sh](4.rewrite-svnlog.sh) を使う。
-
-### svn-all-fast-export
-
-* ルールファイル [input.rules](input.rules) を指定して `svn-all-fast-export` で変換する。
-
-[migrate.sh](migrate.sh) を使う。
-
-## 制限事項
-
-*  ([svn-all-fast-export](https://manpages.ubuntu.com/manpages/trusty/man1/svn-all-fast-export.1.html) で仮の値として [user-list.csv](user-list.csv) をもとに [make-identity-map.py](make-identity-map.py) で `identity-map` (svn ユーザー名と git の committer の対応関係) を生成して を渡して変換している。
-
-## リビジョングラフ
-
-[TortoiseGitによるリビジョングラフ](ttssh2.svg)
-リンクを押したあと RAW を選ぶ。
-グラフが巨大なのでスクロールして確認したところに移動する。
-
 

@@ -47,6 +47,7 @@ match /(branches)/([^/]+)/
   min revision 3221
 end match
 
+# See https://techbase.kde.org/Projects/MoveToGit/UsingSvn2Git#How_rulesets_work
 match /(tags)/([^/]+)/
   repository ttssh2
   branch refs/tags/\2
@@ -62,6 +63,7 @@ match /([^/]+)/(branches)/([^/]+)/
   max revision 3220
 end match
 
+# See https://techbase.kde.org/Projects/MoveToGit/UsingSvn2Git#How_rulesets_work
 match /([^/]+)/(tags)/([^/]+)/
   repository ttssh2
   branch refs/tags/\1-\3

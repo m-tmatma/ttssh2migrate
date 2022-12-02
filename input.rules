@@ -41,18 +41,30 @@ match /trunk/
   min revision 3221
 end match
 
-match /(branches|tags)/([^/]+)/
+match /(branches)/([^/]+)/
   repository ttssh2
   branch \2
+  min revision 3221
+end match
+
+match /(tags)/([^/]+)/
+  repository ttssh2
+  branch refs/tags/\2
   min revision 3221
 end match
 
 ####################################################################################################################################
 # Rule for revision <= r3220 (https://ja.osdn.net/projects/ttssh2/scm/svn/commits/3220)
 ####################################################################################################################################
-match /([^/]+)/(branches|tags)/([^/]+)/
+match /([^/]+)/(branches)/([^/]+)/
   repository ttssh2
   branch \1-\3
+  max revision 3220
+end match
+
+match /([^/]+)/(tags)/([^/]+)/
+  repository ttssh2
+  branch refs/tags/\1-\3
   max revision 3220
 end match
 

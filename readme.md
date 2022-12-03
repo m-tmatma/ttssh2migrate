@@ -117,6 +117,7 @@ https://techbase.kde.org/Projects/MoveToGit/UsingSvn2Git#Checking_for_proper_his
 * [GitHub CLI](https://cli.github.com/) を使うとコマンドラインで成果物をダウンロードできる。
 *  コマンドで workflow  の列挙ができる。
 * Tera Term 4.106 で Linux などに接続して gh を実行する場合 `⢿` や `✓ ` は文字化けして `?` のように表示される。
+* [Tera Term 5.0 alpha1](https://osdn.net/projects/ttssh2/releases/77170) の場合は文字化けしない。
 
 ### 成果物
 

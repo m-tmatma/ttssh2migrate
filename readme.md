@@ -161,3 +161,32 @@ gh run download 3556843090 -p "*GIT*"
 gh run -D artifacts-3556843090 download 3556843090 -p "*GIT*"
 ```
 
+
+## ダウンロードした成果物のpush
+
+ブラウザでも gh コマンドでもいいので変換したGITリポジトリをダウンロードする
+
+### GITリポジトリを展開
+
+```
+tar xf ttssh2-git.tar.bz2
+```
+
+### push 先のリポジトリを用意
+
+push 先のリポジトリを作成する。(ブラウザ等で GitHub にリポジトリを作成する。)
+
+
+### GITリポジトリをすべて push
+
+```
+cd ttssh2
+git push --mirror Push先のURL
+```
+
+#### 具体例 (Push先のURL の部分が  https://github.com/m-tmatma/ttssh2-work.git)
+
+```
+cd ttssh2
+git push --mirror https://github.com/m-tmatma/ttssh2-work.git
+```

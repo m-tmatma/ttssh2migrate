@@ -28,6 +28,11 @@ svnadmin dump $QUIET $SRC_REPO  | \
         --pattern "*.pch" \
         --pattern "*.suo" \
         --pattern "*.sbr" \
+        --pattern "*.sdf" \
+        --pattern "Debug" \
+        --pattern "debug" \
+        --pattern "Release" \
+        --pattern "release" \
         | \
     svnadmin load $QUIET $DST_REPO
 

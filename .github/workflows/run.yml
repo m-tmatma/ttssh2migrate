@@ -154,11 +154,11 @@ jobs:
 
       - name: migrate
         run: |
-          ./migrate.sh
+          ./5.migrate.sh
 
       - name: git repack
         run: |
-          ./git-repack.sh
+          ./6.git-repack.sh
 
       - name: artifacts migration log
         uses: actions/upload-artifact@v3
@@ -174,7 +174,7 @@ jobs:
 
       - name: extract filenames
         run: |
-          ./extract-filenames.sh
+          ./7.extract-filenames.sh
 
       - name: artifacts filenames
         uses: actions/upload-artifact@v3

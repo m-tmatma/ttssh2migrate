@@ -13,8 +13,8 @@ sudo apt install -y svn-all-fast-export
 ./2.filter-svndmp.sh
 ./3.svnlog.sh
 ./4.rewrite-svnlog.sh
-./migrate.sh
-./git-repack.sh
+./5.migrate.sh
+./6.git-repack.sh
 ```
 
 ## 仕組み
@@ -59,14 +59,14 @@ https://github.com/svn-all-fast-export/svn2git を利用して、svn から git 
 
 * ルールファイル [input.rules](input.rules) を指定して `svn-all-fast-export` で変換する。
 
-[migrate.sh](migrate.sh) を使う。
+[5.migrate.sh](5.migrate.sh) を使う。
 
 
 ### git repack
 
 * `git repack` で git リポジトリサイズを減らす
 
-[git-repack.sh](git-repack.sh) を使う。
+[6.git-repack.sh](6.git-repack.sh) を使う。
 
 https://techbase.kde.org/Projects/MoveToGit/UsingSvn2Git#Checking_for_proper_history_in_the_new_git_repository
 

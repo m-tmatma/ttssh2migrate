@@ -132,14 +132,14 @@ jobs:
       - name: archive SVN
         working-directory: workdir
         run: |
-          tar cfj ttssh2-svn.tar.bz2      ttssh2
+          tar cf ttssh2-svn.tar      ttssh2
 
       - name: artifacts SVN repository
         uses: actions/upload-artifact@v3
         with:
           name: artifacts-SVN-build-${{github.run_number}}-${{github.run_id}}
           path: |
-            workdir/**.tar.bz2
+            workdir/**.tar
           # See https://github.com/actions/upload-artifact#retention-period
           retention-days: ${{env.retention-days}}
 
@@ -188,13 +188,13 @@ jobs:
       - name: archive GIT
         working-directory: workdir/gitdir-repack
         run: |
-          tar cfj ttssh2-git.tar.bz2      ttssh2
+          tar cf ttssh2-git.tar      ttssh2
 
       - name: artifacts GIT repository
         uses: actions/upload-artifact@v3
         with:
           name: artifacts-GIT-build-${{github.run_number}}-${{github.run_id}}
           path: |
-            workdir/gitdir-repack/**.tar.bz2
+            workdir/gitdir-repack/**.tar
           # See https://github.com/actions/upload-artifact#retention-period
           retention-days: ${{env.retention-days}}

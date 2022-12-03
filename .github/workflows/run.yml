@@ -17,6 +17,9 @@ on:
       - 'feature/**'
       - 'releases/**'
 
+  # Manual trigger
+  workflow_dispatch:
+
   schedule:
     # See https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
     # This example triggers the workflow every day at 19:00 UTC:

@@ -174,6 +174,7 @@ STATUS  TITLE                           WORKFLOW  BRANCH                        
 
 * gh で成果物をダウンロードする場合、`⢿` のような文字で進捗表示される。(処理が終わると消える。)
 * Tera Term 4.106 で接続して gh を実行する場合は`⢿` のように表示されず `?` のように表示される。
+* [Tera Term 5.0 alpha1](https://osdn.net/projects/ttssh2/releases/77170) の場合は文字化けしない。
 
 
 #### 具体例: `ID 3556843090` の成果物をダウンロードする場合

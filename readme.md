@@ -136,6 +136,14 @@ https://techbase.kde.org/Projects/MoveToGit/UsingSvn2Git#Checking_for_proper_his
 
 ## GitHub CLI
 
+[GitHub CLI](https://cli.github.com/) (=`gh` コマンド) を利用すると GitHub に関する様々な操作をコマンドで実行することができる。
+
+参考
+
+* https://cli.github.com/
+* https://snowsystem.net/cloud/github/github-cli-install/
+
+
 ### 準備
 
 * [GitHub CLI](https://cli.github.com/) からダウンロードしてインストールする。(Windows, Linux どちらでも OK)
@@ -213,7 +221,15 @@ tar xf ttssh2-git.tar.bz2
 
 ### push 先のリポジトリを用意
 
-push 先のリポジトリを作成する。(ブラウザ等で GitHub にリポジトリを作成する。)
+ブラウザでも gh コマンドでもいいので、push 先のリポジトリを作成する。
+
+gh コマンドの場合は以下コマンド
+
+```
+gh repo create
+```
+
+https://cli.github.com/manual/gh_repo_create
 
 
 ### GITリポジトリをすべて push

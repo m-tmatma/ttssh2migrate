@@ -163,6 +163,16 @@ jobs:
         run: |
           ./4.migrate.sh
 
+      - name: artifacts git log
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: artifacts-git-log-build-${{github.run_number}}-${{github.run_id}}
+          path: |
+            /tmp/git-run.log
+          # See https://github.com/actions/upload-artifact#retention-period
+          retention-days: ${{env.retention-days}}
+
       - name: git repack
         run: |
           ./5.git-repack.sh

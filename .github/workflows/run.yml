@@ -173,6 +173,16 @@ jobs:
           # See https://github.com/actions/upload-artifact#retention-period
           retention-days: ${{env.retention-days}}
 
+      - name: artifacts marks
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: artifacts-marks-build-${{github.run_number}}-${{github.run_id}}
+          path: |
+            workdir/gitdir/ttssh2/marks-ttssh2
+          # See https://github.com/actions/upload-artifact#retention-period
+          retention-days: ${{env.retention-days}}
+
       - name: git repack
         run: |
           ./5.git-repack.sh

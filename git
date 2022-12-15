@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo $@ >> /tmp/git-run.log
+/usr/bin/git  $@

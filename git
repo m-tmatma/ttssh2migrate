@@ -1,5 +1,17 @@
 #!/bin/bash
 
+if [ x"$1" = x"fast-import" ]; then
+    echo "----------------- before fast-import -----------------" >> /tmp/git-run.log
+    find . >> /tmp/git-run.log
+    echo "----------------- before fast-import -----------------" >> /tmp/git-run.log
+fi
+
 echo -n $(pwd): >> /tmp/git-run.log
 echo $0 $@  >> /tmp/git-run.log
 /usr/bin/git  $@
+
+if [ x"$1" = x"fast-import" ]; then
+    echo "----------------- after fast-import -----------------" >> /tmp/git-run.log
+    find . >> /tmp/git-run.log
+    echo "----------------- after fast-import -----------------" >> /tmp/git-run.log
+fi

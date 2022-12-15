@@ -1,4 +1,5 @@
 #!/bin/bash
 
-echo $@ >> /tmp/git-run.log
+echo -n $(pwd): >> /tmp/git-run.log
+echo $0 $@  >> /tmp/git-run.log
 /usr/bin/git  $@

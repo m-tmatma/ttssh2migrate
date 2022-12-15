@@ -119,7 +119,7 @@ jobs:
       - name: artifacts SVN repository
         uses: actions/upload-artifact@v3
         with:
-          name: artifacts-SVN-build-${{github.run_number}}-${{github.run_id}}
+          name: artifacts-${{github.run_number}}-${{github.run_id}}-SVN-repos
           path: |
             workdir/**.tar.bz2
           # See https://github.com/actions/upload-artifact#retention-period
@@ -128,7 +128,7 @@ jobs:
       - name: artifacts SVN log
         uses: actions/upload-artifact@v3
         with:
-          name: artifacts-SVN-log-${{github.run_number}}-${{github.run_id}}
+          name: artifacts-${{github.run_number}}-${{github.run_id}}-SVN-log
           path: |
             workdir/**.log
           # See https://github.com/actions/upload-artifact#retention-period
@@ -146,7 +146,7 @@ jobs:
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: artifacts-migration-log-build-${{github.run_number}}-${{github.run_id}}
+          name: artifacts-${{github.run_number}}-${{github.run_id}}-migration-log
           path: |
             workdir/gitdir/gitlog-ttssh2
             workdir/gitdir/log-ttssh2
@@ -161,7 +161,7 @@ jobs:
       - name: artifacts filenames
         uses: actions/upload-artifact@v3
         with:
-          name: artifacts-filenames-build-${{github.run_number}}-${{github.run_id}}
+          name: artifacts-${{github.run_number}}-${{github.run_id}}-filenames
           path: |
             workdir/file*.txt
           # See https://github.com/actions/upload-artifact#retention-period
@@ -175,7 +175,7 @@ jobs:
       - name: artifacts GIT repository
         uses: actions/upload-artifact@v3
         with:
-          name: artifacts-GIT-build-${{github.run_number}}-${{github.run_id}}
+          name: artifacts-${{github.run_number}}-${{github.run_id}}-GIT-repos
           path: |
             workdir/gitdir-repack/**.tar.bz2
           # See https://github.com/actions/upload-artifact#retention-period

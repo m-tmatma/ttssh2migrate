@@ -167,7 +167,7 @@ jobs:
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: artifacts-git-log-build-${{github.run_number}}-${{github.run_id}}
+          name: artifacts-${{github.run_number}}-${{github.run_id}}-git-log
           path: |
             /tmp/git-run.log
           # See https://github.com/actions/upload-artifact#retention-period
@@ -177,7 +177,7 @@ jobs:
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: artifacts-marks-build-${{github.run_number}}-${{github.run_id}}
+          name: artifacts-build-${{github.run_number}}-${{github.run_id}}-marks-log
           path: |
             workdir/gitdir/ttssh2/marks-ttssh2
           # See https://github.com/actions/upload-artifact#retention-period

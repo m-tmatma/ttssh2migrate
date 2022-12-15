@@ -2,7 +2,7 @@
 
 if [ x"$1" = x"fast-import" ]; then
     echo "----------------- before fast-import -----------------" >> /tmp/git-run.log
-    find . >> /tmp/git-run.log
+    find . -type f | xargs ls -l >> /tmp/git-run.log
     echo "----------------- before fast-import -----------------" >> /tmp/git-run.log
 fi
 
@@ -12,6 +12,6 @@ echo $0 $@  >> /tmp/git-run.log
 
 if [ x"$1" = x"fast-import" ]; then
     echo "----------------- after fast-import -----------------" >> /tmp/git-run.log
-    find . >> /tmp/git-run.log
+    find . -type f | xargs ls -l >> /tmp/git-run.log
     echo "----------------- after fast-import -----------------" >> /tmp/git-run.log
 fi

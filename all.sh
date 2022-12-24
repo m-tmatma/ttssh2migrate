@@ -3,6 +3,6 @@
 ./1.mirror-ttssh2.sh
 ./2.filter-svndmp.sh
 ./3.svnlog.sh
-./5.migrate.sh
-./6.git-repack.sh
-./7.extract-filenames.sh
+./4.migrate.sh
+./5.git-repack.sh
+./6.extract-filenames.sh

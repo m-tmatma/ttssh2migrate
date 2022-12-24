@@ -155,7 +155,7 @@ jobs:
 
       - name: extract filenames
         run: |
-          ./7.extract-filenames.sh
+          ./6.extract-filenames.sh
 
       - name: artifacts filenames
         uses: actions/upload-artifact@v3

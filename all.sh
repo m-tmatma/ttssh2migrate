@@ -4,5 +4,5 @@
 ./2.filter-svndmp.sh
 ./3.svnlog.sh
 ./4.migrate.sh
-./6.git-repack.sh
+./5.git-repack.sh
 ./7.extract-filenames.sh

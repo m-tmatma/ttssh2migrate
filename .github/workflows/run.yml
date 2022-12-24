@@ -139,7 +139,7 @@ jobs:
 
       - name: git repack
         run: |
-          ./6.git-repack.sh
+          ./5.git-repack.sh
 
       - name: artifacts migration log
         uses: actions/upload-artifact@v3

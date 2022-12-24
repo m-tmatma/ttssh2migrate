@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+#
+# See https://github.com/svn-all-fast-export/svn2git/issues/146#issuecomment-1183011430
+#
 import sys
 import re
 

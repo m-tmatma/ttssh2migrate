@@ -26,12 +26,13 @@ on:
     - cron:  '0 19 * * *'
 
 env:
-  cache-version: v2
+  svn-cache-version: v2
+  svn-filter-cache-version: v3
+  cache-version: v3
   retention-days: 2
   LANG: "ja_JP.UTF-8"
   svn-org: workdir/ttssh2.org
-  svn-step2: workdir/ttssh2.step2
-  svn-final: workdir/ttssh2
+  svn-filtered: workdir/ttssh2
 
 jobs:
   build:
@@ -68,8 +69,7 @@ jobs:
       - name: create cache directories. (This is for the first time build.)
         run: |
           mkdir -p ${{env.svn-org}}
-          mkdir -p ${{env.svn-step2}}
-          mkdir -p ${{env.svn-final}}
+          mkdir -p ${{env.svn-filtered}}
 
       # dependency
       # * Upstream svn repository
@@ -79,9 +79,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{env.svn-org}}
-          key: ${{env.cache-version}}-ttssh2-r${{env.revision}}
+          key: ${{env.svn-cache-version}}-ttssh2-r${{env.revision}}
           restore-keys: |
-            ${{env.cache-version}}-ttssh2-r10379
+            ${{env.svn-cache-version}}-ttssh2-r10379
 
       - name: mirror (depends on id_cache-svn)
         run: |
@@ -98,8 +98,8 @@ jobs:
         id: cache-svn-filtered
         uses: actions/cache@v3
         with:
-          path: ${{env.svn-step2}}
-          key: ${{env.cache-version}}-ttssh2-svn-filtered-r${{env.revision}}-${{ hashFiles('2.filter-svndmp.sh', 'make-identity-map.py', 'user-list.csv') }}
+          path: ${{env.svn-filtered}}
+          key: ${{env.svn-filter-cache-version}}-ttssh2-svn-filtered-r${{env.revision}}-${{ hashFiles('2.filter-svndmp.sh', 'make-identity-map.py', 'user-list.csv') }}
 
       - name: filter svn dump (cache-svn-filtered)
         if: ${{ steps.cache-svn-filtered.outputs.cache-hit != 'true' }}
@@ -109,28 +109,6 @@ jobs:
       - name: svn log
         run: |
           ./3.svnlog.sh
-
-      # dependency
-      # * Upstream svn repository
-      #   * Revision                        : ${{env.revision}}
-      # * filtered svn repository
-      #   * script to filter svn dump       : '2.filter-svndmp.sh'
-      #   * script to create user map       : 'make-identity-map.py'
-      #   * input data user map             : 'user-list.csv'
-      # * mangled svn repository
-      #   * shell script to mangle svn log  : '4.rewrite-svnlog.sh'
-      #   * script to mangle svn log        : 'convert-svn-log.py'
-      - name: Get cached (id_cache-svn-final)
-        id: cache-svn-final
-        uses: actions/cache@v3
-        with:
-          path: ${{env.svn-final}}
-          key: ${{env.cache-version}}-ttssh2-svn-final-r${{env.revision}}-${{ hashFiles('2.filter-svndmp.sh', 'make-identity-map.py', 'user-list.csv', '4.rewrite-svnlog.sh', 'convert-svn-log.py') }}
-
-      - name: svn log rewrite (cache-svn-final)
-        if: ${{ steps.cache-svn-final.outputs.cache-hit != 'true' }}
-        run: |
-          ./4.rewrite-svnlog.sh
 
       - name: archive SVN
         working-directory: workdir

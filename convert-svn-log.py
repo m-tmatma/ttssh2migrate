@@ -4,7 +4,6 @@
 #
 import sys
 import re
-import fileinput
 
 allRevs = set()
 allIssues = set()
@@ -13,7 +12,7 @@ revLogMatched = set()
 issueLogMatched = set()
 issueLogUnmatched = set()
 
-for line in fileinput.input():
+for line in sys.stdin:
     line = line.rstrip("\r").rstrip("\n")
     print(line)
 

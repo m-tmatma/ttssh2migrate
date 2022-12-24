@@ -26,6 +26,8 @@ on:
     - cron:  '0 19 * * *'
 
 env:
+  svn-cache-version: v2
+  svn-filter-cache-version: v3
   cache-version: v3
   retention-days: 2
   LANG: "ja_JP.UTF-8"
@@ -77,9 +79,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{env.svn-org}}
-          key: ${{env.cache-version}}-ttssh2-r${{env.revision}}
+          key: ${{env.svn-cache-version}}-ttssh2-r${{env.revision}}
           restore-keys: |
-            ${{env.cache-version}}-ttssh2-r10379
+            ${{env.svn-cache-version}}-ttssh2-r10379
 
       - name: mirror (depends on id_cache-svn)
         run: |
@@ -97,7 +99,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{env.svn-filtered}}
-          key: ${{env.cache-version}}-ttssh2-svn-filtered-r${{env.revision}}-${{ hashFiles('2.filter-svndmp.sh', 'make-identity-map.py', 'user-list.csv') }}
+          key: ${{env.svn-filter-cache-version}}-ttssh2-svn-filtered-r${{env.revision}}-${{ hashFiles('2.filter-svndmp.sh', 'make-identity-map.py', 'user-list.csv') }}
 
       - name: filter svn dump (cache-svn-filtered)
         if: ${{ steps.cache-svn-filtered.outputs.cache-hit != 'true' }}

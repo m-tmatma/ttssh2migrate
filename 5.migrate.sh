@@ -20,6 +20,7 @@ svn-all-fast-export \
     --debug-rules \
     --svn-ignore \
     --empty-dirs \
+    --msg-filter $SCRIPT_DIR/convert-svn-log.py \
     $SVN_ROOT > $GIT_ROOT/log-migration.log  2>&1
 
 echo rename defaut branch to main

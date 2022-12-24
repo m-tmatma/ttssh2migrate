@@ -13,7 +13,6 @@
   - [svn sync](#svn-sync)
   - [svndumpfilter](#svndumpfilter)
   - [svn log](#svn-log)
-  - [`svnlook log` \& `svnadmin setlog`](#svnlook-log--svnadmin-setlog)
   - [svn-all-fast-export](#svn-all-fast-export-1)
   - [git repack](#git-repack)
 - [制限事項](#制限事項)
@@ -45,7 +44,6 @@ sudo apt install -y svn-all-fast-export
 ./1.mirror-ttssh2.sh
 ./2.filter-svndmp.sh
 ./3.svnlog.sh
-./4.rewrite-svnlog.sh
 ./5.migrate.sh
 ./6.git-repack.sh
 ```
@@ -81,17 +79,10 @@ https://github.com/svn-all-fast-export/svn2git を利用して、svn から git 
 
 [3.svnlog.sh](3.svnlog.sh) を使う。
 
-## `svnlook log` & `svnadmin setlog`
-
-* `svnlook log` でログを取得する゜
-* [convert-svn-log.py](convert-svn-log.py) でログを修正する (revision, issue をリンクに変換して追記)
-* `svnadmin setlog` でログを書き換える
-
-[4.rewrite-svnlog.sh](4.rewrite-svnlog.sh) を使う。
-
 ## svn-all-fast-export
 
 * ルールファイル [input.rules](input.rules) を指定して `svn-all-fast-export` で変換する。
+* [convert-svn-log.py](convert-svn-log.py) でログを修正する (revision, issue をリンクに変換して追記)
 
 [5.migrate.sh](5.migrate.sh) を使う。
 
@@ -119,11 +110,9 @@ https://techbase.kde.org/Projects/MoveToGit/UsingSvn2Git#Checking_for_proper_his
 |  説明                                     | パス                             | GitHub Actions の artifacts でダウンロード  |
 | ----                                      | ----                             | ----                                        |
 |  svnリポジトリ(オリジナル)                |  `workdir/ttssh2.org`            | × (省略)                                   |
-|  svnリポジトリ(フィルター後)              |  `workdir/ttssh2.step2`          | × (省略)                                   |
-|  svnリポジトリ(ログ書き換え)              |  `workdir/ttssh2`                | 〇                                          |
+|  svnリポジトリ(フィルター後)              |  `workdir/ttssh2`                | 〇                                          |
 |  `svn log` (オリジナル)                   |  `workdir/svn-org.log`           | 〇                                          |
-|  `svn log` (フィルター後)                 |  `workdir/svn-step2.log`         | 〇                                          |
-|  `svn log` (ログ書き換え)                 |  `workdir/svn-step4-rewrite.log` | 〇                                          |
+|  `svn log` (フィルター後)                 |  `workdir/svn.log`               | 〇                                          |
 |  gitリポジトリ                            |  `workdir/gitdir/ttssh2`         | 〇                                          |
 
 ## 成果物のダウンロード

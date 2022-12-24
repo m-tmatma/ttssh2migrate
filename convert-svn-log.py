@@ -1,6 +1,10 @@
 #!/usr/bin/python3
+#
+# See https://github.com/svn-all-fast-export/svn2git/issues/146#issuecomment-1183011430
+#
 import sys
 import re
+import fileinput
 
 allRevs = set()
 allIssues = set()
@@ -9,7 +13,7 @@ revLogMatched = set()
 issueLogMatched = set()
 issueLogUnmatched = set()
 
-for line in sys.stdin:
+for line in fileinput.input():
     line = line.rstrip("\r").rstrip("\n")
     print(line)
 

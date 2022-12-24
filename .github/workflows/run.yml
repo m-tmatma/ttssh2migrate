@@ -135,7 +135,7 @@ jobs:
 
       - name: migrate
         run: |
-          ./5.migrate.sh
+          ./4.migrate.sh
 
       - name: git repack
         run: |

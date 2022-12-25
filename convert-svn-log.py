@@ -74,3 +74,25 @@ if allIssues:
     print("Issues:")
     for issue in sorted(list(allIssues), key=int):
         print(f"* https://osdn.net/projects/ttssh2/ticket/{issue}")
+
+if allRevs:
+    # example
+    # :1 36f35d4e45715ce138189ef27890e5230fb764e6
+    # :2 d45bc04496d06b1f809dcd2313b0919d0b9a078f
+    # :3 a61a858e55ed03638a09e10ddfec7dbbc3ee4b2f
+    # :4 05ea405d4ff4dd55b9fa2b62a3ffeb2d6d9f326b
+    # :5 fa0c196e7c2dbc0fe29fed29478386c6279b5971
+    RevMaps = {}
+    marks = r"marks-ttssh2"
+    with open(marks, "r") as fin:
+        for line in fin:
+            data = line.split()
+            rev = data[0].replace(':', '')
+            commitHash = data[1]
+            RevMaps[rev] = commitHash
+
+    print("")
+    print("commitHashes:")
+    for rev in sorted(list(allRevs), key=int):
+        commitHash = RevMaps.get(str(rev), "not found")
+        print(f"* {rev}: {commitHash}")

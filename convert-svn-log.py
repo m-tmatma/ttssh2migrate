@@ -6,8 +6,8 @@ import sys
 import re
 import subprocess
 
+repoDir = "ttssh2"
 nameWithOwner = "m-tmatma/ttssh2-work"
-CommitURL = "https://github.com/{nameWithOwner}/commit"
 
 allRevs = set()
 allIssues = set()
@@ -83,7 +83,7 @@ if allRevs:
     print("")
     print("commitHashes:")
     for rev in sorted(list(allRevs), key=int):
-        cmd = f"git log --grep 'revision={rev}$' --format='%H'"
+        cmd = f"git log -C {repoDir} --grep 'revision={rev}$' --format='%H'"
         result = subprocess.check_output(cmd.split())
         commitHash = result.decode()
-        print(f"* {rev}: {CommitURL}/{commitHash}")
+        print(f"* {rev}: https://github.com/{nameWithOwner}/commit/{commitHash}")

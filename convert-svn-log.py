@@ -65,19 +65,19 @@ for line in sys.stdin:
                 issueLogUnmatched.add(line)
                 sys.stderr.write(f"ignore issue: {line}\n")
 
-if allRevs:
-    # print empty line for paragraph.
-    print("")
-    print("Revisions:")
-    for rev in sorted(list(allRevs), key=int):
-        print(f"* https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
-
 if allIssues:
     # print empty line for paragraph.
     print("")
     print("Issues:")
     for issue in sorted(list(allIssues), key=int):
         print(f"* https://osdn.net/projects/ttssh2/ticket/{issue}")
+
+if allRevs:
+    # print empty line for paragraph.
+    print("")
+    print("Revisions:")
+    for rev in sorted(list(allRevs), key=int):
+        print(f"* https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
 
 if allRevs:
     print("")

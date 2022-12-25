@@ -84,15 +84,19 @@ if allRevs:
     # :5 fa0c196e7c2dbc0fe29fed29478386c6279b5971
     RevMaps = {}
     marks = r"marks-ttssh2"
-    with open(marks, "r") as fin:
-        for line in fin:
-            data = line.split()
-            rev = data[0].replace(':', '')
-            commitHash = data[1]
-            RevMaps[rev] = commitHash
+    try:
+        with open(marks, "r") as fin:
+            for line in fin:
+                data = line.split()
+                rev = data[0].replace(':', '')
+                commitHash = data[1]
+                RevMaps[rev] = commitHash
 
-    print("")
-    print("commitHashes:")
-    for rev in sorted(list(allRevs), key=int):
-        commitHash = RevMaps.get(str(rev), "not found")
-        print(f"* {rev}: {commitHash}")
+        print("")
+        print("commitHashes:")
+        for rev in sorted(list(allRevs), key=int):
+            commitHash = RevMaps.get(str(rev), "not found")
+            print(f"* {rev}: {commitHash}")
+    except Exception as e:
+        print("[Exception]")
+        print(e)

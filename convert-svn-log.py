@@ -7,6 +7,9 @@ import re
 import os
 import subprocess
 
+nameWithOwner = "m-tmatma/ttssh2-work"
+CommitURL = "https://github.com/{nameWithOwner}/commit"
+
 allRevs = set()
 allIssues = set()
 
@@ -83,4 +86,4 @@ if allRevs:
     for rev in sorted(list(allRevs), key=int):
         cmd = f"git log --grep 'revision={rev}$' --format='%H'"
         result = subprocess.call(cmd.split())
-        print(f"* {rev}: {result}")
+        print(f"* {rev}: {CommitURL}/{result}")

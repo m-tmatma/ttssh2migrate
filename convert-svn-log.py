@@ -86,4 +86,4 @@ if allRevs:
         cmd = f"git log -C {repoDir} --grep 'revision={rev}$' --format='%H'"
         result = subprocess.check_output(cmd.split())
         commitHash = result.decode()
-        print(f"* {rev}: https://github.com/{nameWithOwner}/commit/{commitHash}")
+        print(f"* r{rev}: https://github.com/{nameWithOwner}/commit/{commitHash}")

@@ -86,7 +86,7 @@ if allRevs:
     # :4 05ea405d4ff4dd55b9fa2b62a3ffeb2d6d9f326b
     # :5 fa0c196e7c2dbc0fe29fed29478386c6279b5971
     RevMaps = {}
-    marks = r"marks-ttssh2"
+    marks = r"ttssh2/marks-ttssh2"
     try:
         with open(marks, "r") as fin:
             for line in fin:

@@ -4,6 +4,10 @@
 #
 import sys
 import re
+import subprocess
+
+repoDir = "ttssh2"
+nameWithOwner = "m-tmatma/ttssh2-work"
 
 allRevs = set()
 allIssues = set()
@@ -61,6 +65,13 @@ for line in sys.stdin:
                 issueLogUnmatched.add(line)
                 sys.stderr.write(f"ignore issue: {line}\n")
 
+if allIssues:
+    # print empty line for paragraph.
+    print("")
+    print("Issues:")
+    for issue in sorted(list(allIssues), key=int):
+        print(f"* https://osdn.net/projects/ttssh2/ticket/{issue}")
+
 if allRevs:
     # print empty line for paragraph.
     print("")
@@ -68,9 +79,17 @@ if allRevs:
     for rev in sorted(list(allRevs), key=int):
         print(f"* https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
 
-if allIssues:
-    # print empty line for paragraph.
+if allRevs:
     print("")
-    print("Issues:")
-    for issue in sorted(list(allIssues), key=int):
-        print(f"* https://osdn.net/projects/ttssh2/ticket/{issue}")
+    print("commitHashes:")
+    for rev in sorted(list(allRevs), key=int):
+        try:
+            cmd = ["git", "-C", repoDir, "log", "--grep", f"revision={rev}$", "--format=%H"]
+            result = subprocess.check_output(cmd)
+            commitHash = result.decode()
+            commitHash = commitHash.replace('\r', '').replace('\n', '')
+            if commitHash != "":
+                print(f"* r{rev}: https://github.com/{nameWithOwner}/commit/{commitHash}")
+        except Exception as e:
+            print(f"* r{rev}:")
+            print(e)

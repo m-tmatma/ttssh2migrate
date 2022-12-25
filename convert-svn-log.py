@@ -4,7 +4,6 @@
 #
 import sys
 import re
-import os
 import subprocess
 
 nameWithOwner = "m-tmatma/ttssh2-work"

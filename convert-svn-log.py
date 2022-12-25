@@ -87,6 +87,7 @@ if allRevs:
             cmd = ["git", "-C", repoDir, "log", "--grep", f"revision={rev}$", "--format=%H"]
             result = subprocess.check_output(cmd)
             commitHash = result.decode()
+            commitHash = commitHash.replace('\r', '').replace('\n', '')
             if commitHash != "":
                 print(f"* r{rev}: https://github.com/{nameWithOwner}/commit/{commitHash}")
         except Exception as e:

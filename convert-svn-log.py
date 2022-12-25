@@ -4,6 +4,7 @@
 #
 import sys
 import re
+import os
 
 allRevs = set()
 allIssues = set()
@@ -76,6 +77,8 @@ if allIssues:
         print(f"* https://osdn.net/projects/ttssh2/ticket/{issue}")
 
 if allRevs:
+    print("PWD: ", os.getcwd())
+
     # example
     # :1 36f35d4e45715ce138189ef27890e5230fb764e6
     # :2 d45bc04496d06b1f809dcd2313b0919d0b9a078f

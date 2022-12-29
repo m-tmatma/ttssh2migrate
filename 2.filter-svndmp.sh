@@ -10,7 +10,7 @@ fi
 
 WORKDIR=$SCRIPT_DIR/workdir
 SRC_REPO=$WORKDIR/ttssh2.org
-DST_REPO=$WORKDIR/ttssh2
+DST_REPO=$WORKDIR/ttssh2.filter
 rm -rf $DST_REPO
 svnadmin create $DST_REPO
 svnadmin dump $QUIET $SRC_REPO  | \

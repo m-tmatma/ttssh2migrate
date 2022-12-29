@@ -28,11 +28,13 @@ on:
 env:
   svn-cache-version: v2
   svn-filter-cache-version: v3
+  svn-converted-cache-version: v3
   cache-version: v3
   retention-days: 2
   LANG: "ja_JP.UTF-8"
   svn-org: workdir/ttssh2.org
-  svn-filtered: workdir/ttssh2
+  svn-filtered: workdir/ttssh2.filter
+  svn-converted: workdir/ttssh2
 
 jobs:
   build:
@@ -132,8 +134,23 @@ jobs:
         run: |
           ./2.filter-svndmp.sh
 
-      - name: set svn eol-style (cache-svn-filtered)
-        if: ${{ steps.cache-svn-filtered.outputs.cache-hit != 'true' }}
+      # dependency
+      # * Upstream svn repository
+      #   * Revision                        : ${{env.revision}}
+      # * converted svn repository
+      #   * script to filter svn dump       : '2.filter-svndmp.sh'
+      #   * script to create user map       : 'make-identity-map.py'
+      #   * input data user map             : 'user-list.csv'
+      #   * script to convert eol-style     : '2-2.svn-eol-style.sh'
+      - name: Get cached (id_cache-svn-converted)
+        id: cache-svn-converted
+        uses: actions/cache@v3
+        with:
+          path: ${{env.svn-converted}}
+          key: ${{env.svn-converted-cache-version}}-ttssh2-svn-converted-r${{env.revision}}-${{ hashFiles('2.filter-svndmp.sh', 'make-identity-map.py', 'user-list.csv', '2-2.svn-eol-style.sh') }}
+
+      - name: set svn eol-style (cache-svn-converted)
+        if: ${{ steps.cache-svn-converted.outputs.cache-hit != 'true' }}
         run: |
           ./2-2.svn-eol-style.sh
 

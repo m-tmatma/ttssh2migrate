@@ -9,7 +9,10 @@ if [ x"$CI" = x"true" ]; then
 fi
 
 WORKDIR=$SCRIPT_DIR/workdir
+SRC_REPO=$WORKDIR/ttssh2.filter
 DST_REPO=$WORKDIR/ttssh2
+
+cp -a $SRC_REPO $DST_REPO
 svn co file://$DST_REPO/trunk             $WORKDIR/svnwork/trunk
 svn co file://$DST_REPO/branches/4-stable $WORKDIR/svnwork/4-stable
 

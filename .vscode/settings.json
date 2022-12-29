@@ -1,3 +1,9 @@
 {
-    "explorer.excludeGitIgnore": true
+    "explorer.excludeGitIgnore": true,
+    "cSpell.ignoreWords": [
+        "gitdir",
+        "svndmp",
+        "ttssh",
+        "workdir"
+    ]
 }

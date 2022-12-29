@@ -132,6 +132,11 @@ jobs:
         run: |
           ./2.filter-svndmp.sh
 
+      - name: set svn eol-style (cache-svn-filtered)
+        if: ${{ steps.cache-svn-filtered.outputs.cache-hit != 'true' }}
+        run: |
+          ./2-2.svn-eol-style.sh
+
       - name: svn log
         run: |
           ./3.svnlog.sh

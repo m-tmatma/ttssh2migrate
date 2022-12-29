@@ -8,6 +8,7 @@
 /workdir/.subversion/
 /workdir/*.txt
 /workdir/*.log
+/workdir/svnwork/
 *.svndmp
 .bash_history
 identity-map

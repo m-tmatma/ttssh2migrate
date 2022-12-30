@@ -12,9 +12,11 @@ WORKDIR=$SCRIPT_DIR/workdir
 SRC_REPO=$WORKDIR/ttssh2.filter
 DST_REPO=$WORKDIR/ttssh2
 
+rm -rf   $DST_REPO
+rm -rf   $WORKDIR/svnwork/
+
 cp -a $SRC_REPO $DST_REPO
 
-rm -rf   $WORKDIR/svnwork/
 
 svn co file://$DST_REPO/trunk             $WORKDIR/svnwork/trunk
 (cd $WORKDIR/svnwork/trunk    && find -name "*.c" -or -name "*.h" -or  -name "*.cpp" | xargs svn propset svn:eol-style native && svn commit -m "svn:eol-style native")

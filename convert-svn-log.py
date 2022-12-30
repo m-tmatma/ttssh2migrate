@@ -7,7 +7,6 @@ import re
 import subprocess
 
 repoDir = "ttssh2"
-nameWithOwner = "m-tmatma/ttssh2-work"
 
 allRevs = set()
 allIssues = set()
@@ -89,7 +88,7 @@ if allRevs:
             commitHash = result.decode()
             commitHash = commitHash.replace('\r', '').replace('\n', '')
             if commitHash != "":
-                print(f"* r{rev}: https://github.com/{nameWithOwner}/commit/{commitHash}")
+                print(f"* r{rev}: {commitHash}")
         except Exception as e:
             print(f"* r{rev}:")
             print(e)

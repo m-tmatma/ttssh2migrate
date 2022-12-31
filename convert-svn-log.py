@@ -72,15 +72,8 @@ if allIssues:
         print(f"* https://osdn.net/projects/ttssh2/ticket/{issue}")
 
 if allRevs:
-    # print empty line for paragraph.
     print("")
     print("Revisions:")
-    for rev in sorted(list(allRevs), key=int):
-        print(f"* https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
-
-if allRevs:
-    print("")
-    print("commitHashes:")
     for rev in sorted(list(allRevs), key=int):
         try:
             cmd = ["git", "-C", repoDir, "log", "--all", "--grep", f"revision={rev}$", "--format=%H"]
@@ -88,7 +81,7 @@ if allRevs:
             commitHash = result.decode()
             commitHash = commitHash.replace('\r', '').replace('\n', '')
             if commitHash != "":
-                print(f"* r{rev}: {commitHash}")
+                print(f"* r{rev}: {commitHash} https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
         except Exception as e:
             print(f"* r{rev}:")
             print(e)

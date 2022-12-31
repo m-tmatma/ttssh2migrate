@@ -32,7 +32,7 @@ for line in sys.stdin:
     # OK: (rXXX)
     # NG: rXXX_
     # OK: rXXX,
-    # OK:  rXXX (space before and/or after revsion)
+    # OK:  rXXX (space before and/or after revision)
 
     revRange = r"r(\d+)\s*-\s*r(\d+)"
     revOne   = r"r(\d+)"

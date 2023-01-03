@@ -14,12 +14,13 @@ output = sys.argv[2]
 with open(input, "r") as f_in, open(output, "w") as f_out:
     reader = csv.DictReader(f_in)
     for row in reader:
-        user = row["user"]
+        svn_user = row["svn_user"]
+        git_user = row["git_user"]
         email = row["email"]
 
         # example:
         #   janesvnaccountname = Jane Doe <jane.doe@example.com>
-        data = f"{user} = {user} <{email}>"
+        data = f"{svn_user} = {git_user} <{email}>"
         #print(data)
         f_out.write(data + "\n")
 

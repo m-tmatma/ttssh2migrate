@@ -40,6 +40,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Set Timezone
+        uses: szenius/set-timezone@v1.1
+        with:
+          timezoneLinux: "Asia/Tokyo"
+
       - name: Install svn-all-fast-export
         run: |
             sudo apt install -y svn-all-fast-export

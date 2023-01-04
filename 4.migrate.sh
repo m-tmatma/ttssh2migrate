@@ -10,9 +10,8 @@ mkdir -p $GIT_ROOT
 cd       $GIT_ROOT
 
 $SCRIPT_DIR/make-identity-map.py $SCRIPT_DIR/user-list.csv $SCRIPT_DIR/identity-map
-
 echo running svn-all-fast-export
-svn-all-fast-export \
+$SCRIPT_DIR/svn2git/svn-all-fast-export \
     --rules $SCRIPT_DIR/input.rules \
     --identity-map  $SCRIPT_DIR/identity-map \
     --add-metadata \

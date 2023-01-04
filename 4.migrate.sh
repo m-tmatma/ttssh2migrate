@@ -22,6 +22,7 @@ svn-all-fast-export \
     --empty-dirs \
     --msg-filter $SCRIPT_DIR/convert-svn-log.py \
     --commit-interval 1 \
+    --use-localtime \
     $SVN_ROOT > $GIT_ROOT/log-migration.log  2>&1
 
 echo rename defaut branch to main

@@ -156,7 +156,6 @@ jobs:
 
       - name: migrate
         run: |
-          export PATH=$(pwd)/svn2git:$PATH
           ./4.migrate.sh
 
       - name: git repack

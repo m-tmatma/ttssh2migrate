@@ -40,7 +40,7 @@
 # 変換手順
 
 ```
-sudo apt install -y svn-all-fast-export
+./0.build-svn2git.sh
 ./1.mirror-ttssh2.sh
 ./2.filter-svndmp.sh
 ./3.svnlog.sh
@@ -54,7 +54,7 @@ https://github.com/svn-all-fast-export/svn2git を利用して、svn から git 
 
 ##  svn-all-fast-export
 
-[svn-all-fast-export](https://manpages.ubuntu.com/manpages/trusty/man1/svn-all-fast-export.1.html) は apt でインストールする。
+[svn-all-fast-export](https://manpages.ubuntu.com/manpages/trusty/man1/svn-all-fast-export.1.html) はカスタマイズ版を自前ビルドする。
 `svn-all-fast-export` を利用するためには Linux が必要。Ubuntu を想定。
 
 # 変換手順詳細

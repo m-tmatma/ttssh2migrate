@@ -6,6 +6,7 @@ import sys
 import re
 import subprocess
 
+logF = open("convert-svn-log.log", "a")
 repoDir = "ttssh2"
 
 allRevs = set()
@@ -74,6 +75,8 @@ if allIssues:
 if allRevs:
     print("")
     print("Revisions:")
+    listRevs = [ "r" + str(rev) for rev in sorted(list(allRevs)) ]
+    logF.write("Revisions:" + ", ".join(listRevs)  + "\n")
     for rev in sorted(list(allRevs), key=int):
         try:
             cmd = ["git", "-C", repoDir, "log", "--all", "--grep", f"revision={rev}$", "--format=%H"]
@@ -84,6 +87,11 @@ if allRevs:
                 print(f"* r{rev}: {commitHash} https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
             else:
                 print(f"* r{rev}: NotFound https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
+                logF.write(f"commitHash for {rev} is empty\n")
         except Exception as e:
             print(f"* r{rev}:")
             print(e)
+            logF.write(f"Exception:\n")
+            logF.write(f"* r{rev}:\n")
+            logF.write(str(e) + "\n")
+logF.close()

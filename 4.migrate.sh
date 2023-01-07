@@ -28,3 +28,4 @@ $SCRIPT_DIR/svn2git/svn-all-fast-export \
 
 echo rename defaut branch to main
 git -C $GIT_ROOT/ttssh2 branch -m main
+echo see $SCRIPT_DIR/workdir/gitdir/convert-svn-log.log

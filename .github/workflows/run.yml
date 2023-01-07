@@ -108,6 +108,11 @@ jobs:
         run: |
           ./1.mirror-ttssh2.sh
 
+      - name: archive SVN org
+        working-directory: workdir
+        run: |
+          tar cfj ttssh2-org-svn.tar.bz2      ttssh2.org
+
       # dependency
       # * Upstream svn repository
       #   * Revision                        : ${{env.revision}}

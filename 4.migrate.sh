@@ -12,6 +12,7 @@ cd       $GIT_ROOT
 
 $SCRIPT_DIR/make-identity-map.py $SCRIPT_DIR/user-list.csv $SCRIPT_DIR/identity-map
 
+rm -f $SCRIPT_DIR/workdir/gitdir/convert-svn-log.log
 echo running svn-all-fast-export
 svn-all-fast-export \
     --rules $SCRIPT_DIR/input.rules \

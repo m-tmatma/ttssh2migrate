@@ -51,22 +51,12 @@ jobs:
         with:
           timezoneLinux: "Asia/Tokyo"
 
-      - name: 'Install build dependencies'
+      - name: Install svn-all-fast-export
         run: |-
           set -e
           sudo apt-get update
           sudo apt-get install --yes --no-install-recommends \
-            build-essential libapr1-dev libsvn-dev qt5-qmake qtbase5-dev
-
-      - name: Configure for svn2git
-        working-directory: svn2git
-        run: |-
-          qmake
-
-      - name: Build for svn2git
-        working-directory: svn2git
-        run: |-
-          make
+            svn-all-fast-export
 
       - name: ja_JP.UTF-8
         run: |

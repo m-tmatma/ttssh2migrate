@@ -13,7 +13,7 @@ cd       $GIT_ROOT
 $SCRIPT_DIR/make-identity-map.py $SCRIPT_DIR/user-list.csv $SCRIPT_DIR/identity-map
 
 echo running svn-all-fast-export
-$SCRIPT_DIR/svn2git/svn-all-fast-export \
+svn-all-fast-export \
     --rules $SCRIPT_DIR/input.rules \
     --identity-map  $SCRIPT_DIR/identity-map \
     --add-metadata \
@@ -23,7 +23,6 @@ $SCRIPT_DIR/svn2git/svn-all-fast-export \
     --empty-dirs \
     --msg-filter $SCRIPT_DIR/convert-svn-log.py \
     --commit-interval 1 \
-    --use-localtime \
     $SVN_ROOT > $GIT_ROOT/log-migration.log  2>&1
 
 echo rename defaut branch to main

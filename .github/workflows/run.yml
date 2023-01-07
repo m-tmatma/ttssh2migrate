@@ -172,6 +172,15 @@ jobs:
         run: |
           git -C workdir/gitdir/ttssh2/ log --all --grep=NotFound -n 10
 
+      - name: artifacts filter mangle log
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts-${{github.run_number}}-${{github.run_id}}-filter-mangle-log
+          path: |
+            workdir/gitdir/convert-svn-log.log
+          # See https://github.com/actions/upload-artifact#retention-period
+          retention-days: ${{env.retention-days}}
+
       - name: git repack
         run: |
           ./5.git-repack.sh

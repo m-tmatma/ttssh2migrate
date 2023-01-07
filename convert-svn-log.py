@@ -15,6 +15,7 @@ allIssues = set()
 revLogMatched = set()
 issueLogMatched = set()
 issueLogUnmatched = set()
+targetRev = None
 
 for line in sys.stdin:
     line = line.rstrip("\r").rstrip("\n")
@@ -25,6 +26,10 @@ for line in sys.stdin:
     if r:
         #sys.stderr.write(f"ignore: {line}\n")
         continue
+
+    r = re.search(r"revision=(\d+)\b", line)
+    if r:
+        targetRev = r.group(1)
 
     # NG: -rXXX
     # NG: rXXX-
@@ -76,22 +81,23 @@ if allRevs:
     print("")
     print("Revisions:")
     listRevs = [ "r" + str(rev) for rev in sorted(list(allRevs)) ]
-    logF.write("Revisions:" + ", ".join(listRevs)  + "\n")
+    logF.write(f"[r{targetRev}] Revisions:" + ", ".join(listRevs)  + "\n")
     for rev in sorted(list(allRevs), key=int):
         try:
-            cmd = ["git", "-C", repoDir, "log", "--all", "--grep", f"revision={rev}$", "--format=%H"]
+            cmd = ["git", "-C", repoDir, "log", "--all", "--grep", f"revision={rev}\b", "--format=%H"]
             result = subprocess.check_output(cmd)
             commitHash = result.decode()
             commitHash = commitHash.replace('\r', '').replace('\n', '')
             if commitHash != "":
                 print(f"* r{rev}: {commitHash} https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
             else:
-                print(f"* r{rev}: NotFound https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
-                logF.write(f"commitHash for {rev} is empty\n")
+                print(f"* r{rev}: NotFound  at r{targetRev} https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
+                logF.write(f"[r{targetRev}] commitHash for {rev} is empty\n")
         except Exception as e:
             print(f"* r{rev}:")
             print(e)
-            logF.write(f"Exception:\n")
-            logF.write(f"* r{rev}:\n")
-            logF.write(str(e) + "\n")
+            logF.write(f"[r{targetRev}] Exception:\n")
+            logF.write(f"[r{targetRev}] * r{rev}:\n")
+            logF.write(f"[r{targetRev}] " + str(e) + "\n")
+    logF.write("-----------------------------------------------\n")
 logF.close()

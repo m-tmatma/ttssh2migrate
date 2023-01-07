@@ -1,6 +1,6 @@
 #!/bin/sh -xe
 
-./0.build-svn2git.sh
+#./0.build-svn2git.sh
 ./1.mirror-ttssh2.sh
 ./2.filter-svndmp.sh
 ./3.svnlog.sh

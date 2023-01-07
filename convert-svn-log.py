@@ -82,6 +82,8 @@ if allRevs:
             commitHash = commitHash.replace('\r', '').replace('\n', '')
             if commitHash != "":
                 print(f"* r{rev}: {commitHash} https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
+            else:
+                print(f"* r{rev}: NotFound https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
         except Exception as e:
             print(f"* r{rev}:")
             print(e)

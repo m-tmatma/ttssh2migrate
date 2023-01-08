@@ -178,7 +178,7 @@ jobs:
           name: artifacts-${{github.run_number}}-${{github.run_id}}-filter-mangle-log
           path: |
             workdir/gitdir/convert-svn-log.log
-            workdir/gitdir/*.csv
+            workdir/gitdir/timestamp.csv
           # See https://github.com/actions/upload-artifact#retention-period
           retention-days: ${{env.retention-days}}
 

@@ -82,6 +82,7 @@ if allRevs:
     print("Revisions:")
     listRevs = [ "r" + str(rev) for rev in sorted(list(allRevs)) ]
     logF.write(f"[r{targetRev}] Revisions:" + ", ".join(listRevs)  + "\n")
+    isNotFound = False
     for rev in sorted(list(allRevs), key=int):
         try:
             cmd = ["git", "-C", repoDir, "log", "--all", "--grep", f"revision={rev}\b", "--format=%H"]
@@ -93,11 +94,24 @@ if allRevs:
             else:
                 print(f"* r{rev}: NotFound  at r{targetRev} https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
                 logF.write(f"[r{targetRev}] commitHash for {rev} is empty\n")
+                isNotFound = True
+
         except Exception as e:
             print(f"* r{rev}:")
             print(e)
             logF.write(f"[r{targetRev}] Exception:\n")
             logF.write(f"[r{targetRev}] * r{rev}:\n")
             logF.write(f"[r{targetRev}] " + str(e) + "\n")
+
+    if isNotFound:
+        cmd = ["git", "-C", repoDir, "show", "-s"]
+        cmd_str = " ".join(cmd)
+        logF.write(f"[r{targetRev}]: $ {cmd_str}\n")
+        print(f"[r{targetRev}]: $ {cmd_str}")
+        result = subprocess.check_output(cmd).decode()
+        for line in result.splitlines():
+            logF.write(f"[r{targetRev}]: {line}\n")
+            print(f"[r{targetRev}]: {line}")
+
     logF.write("-----------------------------------------------\n")
 logF.close()

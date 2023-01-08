@@ -5,6 +5,15 @@
 import sys
 import re
 import subprocess
+import time
+import os
+
+timestampCSV = "timestamp.csv"
+if not os.path.exists(timestampCSV):
+    outCSV = open(timestampCSV, "w")
+    outCSV.write(f"rev,timestamp\n")
+else:
+    outCSV = open(timestampCSV, "a")
 
 logF = open("convert-svn-log.log", "a")
 repoDir = "ttssh2"
@@ -69,6 +78,9 @@ for line in sys.stdin:
             if line not in issueLogUnmatched:
                 issueLogUnmatched.add(line)
                 sys.stderr.write(f"ignore issue: {line}\n")
+
+now = time.time()
+outCSV.write(f"{targetRev},{now}\n")
 
 if allIssues:
     # print empty line for paragraph.

@@ -103,15 +103,19 @@ if allRevs:
             logF.write(f"[r{targetRev}] * r{rev}:\n")
             logF.write(f"[r{targetRev}] " + str(e) + "\n")
 
-    if isNotFound:
+try:
+    if targetRev is not None:
         cmd = ["git", "-C", repoDir, "show", "-s"]
         cmd_str = " ".join(cmd)
         logF.write(f"[r{targetRev}]: $ {cmd_str}\n")
-        print(f"[r{targetRev}]: $ {cmd_str}")
         result = subprocess.check_output(cmd).decode()
         for line in result.splitlines():
             logF.write(f"[r{targetRev}]: {line}\n")
-            print(f"[r{targetRev}]: {line}")
-
-    logF.write("-----------------------------------------------\n")
+except Exception as e:
+    print(f"* r{rev}:")
+    print(e)
+    logF.write(f"[r{targetRev}] Exception:\n")
+    logF.write(f"[r{targetRev}] * r{rev}:\n")
+    logF.write(f"[r{targetRev}] " + str(e) + "\n")
+logF.write("-----------------------------------------------\n")
 logF.close()

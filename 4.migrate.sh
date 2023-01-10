@@ -26,6 +26,7 @@ $SCRIPT_DIR/svn2git/svn-all-fast-export \
     --commit-interval 1 \
     --use-localtime \
     --max-rev 3270 \
+    --fast-import-timeout 0 \
     $SVN_ROOT > $GIT_ROOT/log-migration.log  2>&1
 
 echo rename defaut branch to main

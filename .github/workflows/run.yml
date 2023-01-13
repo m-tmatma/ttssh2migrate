@@ -33,7 +33,7 @@ env:
   svn-cache-version: v2
   svn-filter-cache-version: v3
   cache-version: v3
-  retention-days: 2
+  retention-days: 14
   LANG: "ja_JP.UTF-8"
   svn-org: workdir/ttssh2.org
   svn-filtered: workdir/ttssh2

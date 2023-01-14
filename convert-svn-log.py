@@ -115,6 +115,15 @@ if allRevs:
             logF.write(f"[r{targetRev}] * r{rev}:\n")
             logF.write(f"[r{targetRev}] " + str(e) + "\n")
 
+
+    cmd = ["git", "-C", repoDir, "log", "--all"]
+    cmd_str = " ".join(cmd)
+    logF.write(f"[r{targetRev}]: $ {cmd_str}\n")
+    result = subprocess.check_output(cmd).decode()
+    with open(f"log-all-convert-svn-log.{targetRev}.log", "w") as f:
+        for line in result.splitlines():
+            f.write(f"[r{targetRev}]: {line}\n")
+
 try:
     if targetRev is not None:
         cmd = ["git", "-C", repoDir, "show", "-s"]
@@ -131,3 +140,4 @@ except Exception as e:
     logF.write(f"[r{targetRev}] " + str(e) + "\n")
 logF.write("-----------------------------------------------\n")
 logF.close()
+

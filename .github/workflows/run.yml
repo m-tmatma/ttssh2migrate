@@ -168,6 +168,10 @@ jobs:
         run: |
           ./4.migrate.sh
 
+      - name: show NotFound log
+        run: |
+          git -C workdir/gitdir/ttssh2/ log --all --grep=NotFound -n 10
+
       - name: git repack
         run: |
           ./5.git-repack.sh

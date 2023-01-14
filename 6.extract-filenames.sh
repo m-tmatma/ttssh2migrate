@@ -6,6 +6,7 @@ SVN_ROOT=$WORKDIR/ttssh2
 GIT_ROOT=$WORKDIR/gitdir
 GIT_DIR=$GIT_ROOT/ttssh2
 
+mkdir -p $WORKDIR
 cd       $GIT_DIR
 git rev-list --all | xargs -n 1 git ls-tree -r --name-only | $SCRIPT_DIR/drop-duplicate.py | tee $WORKDIR/file-full-names.txt
 sort $WORKDIR/file-full-names.txt > $WORKDIR/file-sorted-full-names.txt

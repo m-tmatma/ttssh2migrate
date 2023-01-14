@@ -5,6 +5,8 @@ WORKDIR=$SCRIPT_DIR/workdir
 SRC_REPO=$WORKDIR/ttssh2.org
 URL=file://$SRC_REPO
 
+mkdir -p $WORKDIR
+
 QUIET=
 if [ x"$CI" = x"true" ]; then
     QUIET=--quiet

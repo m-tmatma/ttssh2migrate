@@ -6,6 +6,7 @@ GIT_ROOT=$WORKDIR/gitdir
 GIT_ROOT_REPACK=$WORKDIR/gitdir-repack
 
 rm   -rf $GIT_ROOT_REPACK
+mkdir -p $WORKDIR
 mkdir -p $GIT_ROOT_REPACK
 
 du -h $GIT_ROOT/ttssh2

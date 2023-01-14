@@ -92,6 +92,7 @@ jobs:
 
       - name: create cache directories. (This is for the first time build.)
         run: |
+          mkdir -p workdir
           mkdir -p ${{env.svn-org}}
           mkdir -p ${{env.svn-filtered}}
 

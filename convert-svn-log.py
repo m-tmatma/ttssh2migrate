@@ -76,7 +76,7 @@ if allRevs:
     print("Revisions:")
     for rev in sorted(list(allRevs), key=int):
         try:
-            cmd = ["git", "-C", repoDir, "log", "--all", "--grep", f"revision={rev}\\$", "--format=%H"]
+            cmd = ["git", "-C", repoDir, "log", "--all", "--grep", f"revision={rev}\\b", "--format=%H"]
             result = subprocess.check_output(cmd)
             commitHash = result.decode()
             commitHash = commitHash.replace('\r', '').replace('\n', '')

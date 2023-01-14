@@ -108,21 +108,18 @@ if allRevs:
                 logF.write(f"[r{targetRev}] commitHash for {rev} is empty\n")
                 isNotFound = True
 
+                cmd = ["git", "-C", repoDir, "log", "--all"]
+                cmd_str = " ".join(cmd)
+                result = subprocess.check_output(cmd).decode()
+                with open(f"log-all-convert-svn-log-r{rev}-at-r{targetRev}.log", "w") as f:
+                    for line in result.splitlines():
+                        f.write(f"[r{targetRev}]: {line}\n")
         except Exception as e:
             print(f"* r{rev}:")
             print(e)
             logF.write(f"[r{targetRev}] Exception:\n")
             logF.write(f"[r{targetRev}] * r{rev}:\n")
             logF.write(f"[r{targetRev}] " + str(e) + "\n")
-
-    if isNotFound == False:
-        cmd = ["git", "-C", repoDir, "log", "--all"]
-        cmd_str = " ".join(cmd)
-        result = subprocess.check_output(cmd).decode()
-        with open(f"log-all-convert-svn-log.{targetRev}.log", "w") as f:
-            for line in result.splitlines():
-                f.write(f"[r{targetRev}]: {line}\n")
-
 try:
     if targetRev is not None:
         cmd = ["git", "-C", repoDir, "show", "-s"]

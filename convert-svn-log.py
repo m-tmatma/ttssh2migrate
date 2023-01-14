@@ -122,7 +122,7 @@ if allRevs:
             logF.write(f"[r{targetRev}] " + str(e) + "\n")
 
     if isNotFound == True:
-        cmd = ["tar", "cfz", f"ttssh2-git-r{targetRev}.tar.gz", repoDir]
+        cmd = ["tar", "cfa", f"ttssh2-git-r{targetRev}.tar.zst", repoDir]
         _ = subprocess.check_output(cmd)
 
 try:

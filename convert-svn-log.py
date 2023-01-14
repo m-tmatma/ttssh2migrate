@@ -121,12 +121,16 @@ if allRevs:
             logF.write(f"[r{targetRev}] * r{rev}:\n")
             logF.write(f"[r{targetRev}] " + str(e) + "\n")
 
-    if isNotFound == True:
-        cmd = ["git", "-C", repoDir, "rev-list", "--all"]
-        result = subprocess.check_output(cmd).decode()
-        with open(f"log-ttssh2-git-r{targetRev}.log", "w") as f:
-            for line in result.splitlines():
-                f.write(f"{line}\n")
+    try:
+        if isNotFound == True:
+            cmd = ["git", "-C", repoDir, "rev-list", "--all"]
+            result = subprocess.check_output(cmd).decode()
+            with open(f"log-ttssh2-git-r{targetRev}.log", "w") as f:
+                for line in result.splitlines():
+                    f.write(f"{line}\n")
+    except Exception as e:
+        print(f"git rev-list:")
+        print(e)
 try:
     if targetRev is not None:
         cmd = ["git", "-C", repoDir, "show", "-s"]

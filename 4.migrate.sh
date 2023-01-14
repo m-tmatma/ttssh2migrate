@@ -27,3 +27,4 @@ $SCRIPT_DIR/svn2git/svn-all-fast-export \
 
 echo rename defaut branch to main
 git -C $GIT_ROOT/ttssh2 branch -m main
+git -C $GIT_ROOT/ttssh2 log --all --grep=NotFound > $GIT_ROOT/log-NotFound.log

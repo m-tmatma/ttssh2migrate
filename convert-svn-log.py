@@ -115,7 +115,7 @@ if allRevs:
             logF.write(f"[r{targetRev}] * r{rev}:\n")
             logF.write(f"[r{targetRev}] " + str(e) + "\n")
 
-    if not isNotFound:
+    if isNotFound == False:
         cmd = ["git", "-C", repoDir, "log", "--all"]
         cmd_str = " ".join(cmd)
         result = subprocess.check_output(cmd).decode()

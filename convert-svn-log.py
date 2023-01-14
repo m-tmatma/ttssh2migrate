@@ -120,6 +120,11 @@ if allRevs:
             logF.write(f"[r{targetRev}] Exception:\n")
             logF.write(f"[r{targetRev}] * r{rev}:\n")
             logF.write(f"[r{targetRev}] " + str(e) + "\n")
+
+    if isNotFound == False:
+            cmd = ["tar", "cfz", f"ttssh2-git-r{targetRev}.tar.gz", repoDir]
+            result = subprocess.check_output(cmd)
+
 try:
     if targetRev is not None:
         cmd = ["git", "-C", repoDir, "show", "-s"]

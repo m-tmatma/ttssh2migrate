@@ -12,6 +12,8 @@ WORKDIR=$SCRIPT_DIR/workdir
 SRC_REPO=$WORKDIR/ttssh2.org
 DST_REPO=$WORKDIR/ttssh2
 rm -rf $DST_REPO
+mkdir -p $WORKDIR
+
 svnadmin create $DST_REPO
 svnadmin dump $QUIET $SRC_REPO  | \
     svndumpfilter exclude \

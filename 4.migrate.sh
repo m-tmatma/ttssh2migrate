@@ -6,6 +6,7 @@ SVN_ROOT=$WORKDIR/ttssh2
 GIT_ROOT=$WORKDIR/gitdir
 
 rm   -rf $GIT_ROOT
+mkdir -p $WORKDIR
 mkdir -p $GIT_ROOT
 cd       $GIT_ROOT
 

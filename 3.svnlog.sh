@@ -6,6 +6,7 @@ cd $SCRIPT_DIR
 WORKDIR=$SCRIPT_DIR/workdir
 SRC_REPO=$WORKDIR/ttssh2.org
 DST_REPO=$WORKDIR/ttssh2
+mkdir -p $WORKDIR
 
 svn log -v file://$SRC_REPO > $WORKDIR/svn-org.log
 svn log -v file://$DST_REPO > $WORKDIR/svn.log

@@ -5,6 +5,57 @@
 import sys
 import re
 import subprocess
+import csv
+import os
+
+def get_log(repoDir, git_hash):
+    cmd = ["git", "-C", repoDir, "log", "-n", "1", git_hash]
+    return subprocess.check_output(cmd).decode()
+
+def get_svn_rev(repoDir, git_hash):
+    result = get_log(repoDir, git_hash)
+    for line in result.splitlines():
+        match = re.search(r'revision=(\d+)$', line)
+        if match:
+            svn_rev = int(match.group(1))
+            return svn_rev
+    return None
+
+def get_rev_hash_map(repoDir):
+    # all revision list
+    all_git_hash = None
+    cmd = ["git", "-C", repoDir, "rev-list", "--all"]
+    result = subprocess.check_output(cmd).decode()
+    with open(f"git-hash-list.log", "w") as f:
+        for line in result.splitlines():
+            f.write(f"{line}\n")
+        all_git_hash = { line for line in result.splitlines() }
+
+    csv_file = 'svn-rev-to-git-hash-map.csv'
+
+    cached_git_hash = set()
+    revision_to_hash_map = {}
+
+    # read csv
+    if os.path.exists(csv_file):
+        with open(csv_file, "r") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                svn_rev  = int(row["svn_rev"])
+                git_hash = row["git_hash"]
+                revision_to_hash_map[svn_rev] = git_hash
+                cached_git_hash.add(git_hash)
+
+    target_to_get_hash = all_git_hash - cached_git_hash
+    for git_hash in target_to_get_hash:
+        svn_rev = get_svn_rev(repoDir, git_hash)
+        revision_to_hash_map[svn_rev] = git_hash
+
+    with open(csv_file, "w") as f:
+        writer = csv.DictWriter(f, ['svn_rev', 'git_hash'])
+        writer.writeheader()
+        for svn_rev, git_hash in revision_to_hash_map.items():
+            writer.writerow({'svn_rev' : svn_rev, 'git_hash' : git_hash})
 
 repoDir = "ttssh2"
 
@@ -14,6 +65,13 @@ allIssues = set()
 revLogMatched = set()
 issueLogMatched = set()
 issueLogUnmatched = set()
+
+try:
+    revision_to_hash_map = get_rev_hash_map(repoDir)
+except Exception as e:
+    with open("log.log", "a") as f:
+        f.write(f"{e}\n")
+    raise
 
 for line in sys.stdin:
     line = line.rstrip("\r").rstrip("\n")
@@ -75,15 +133,9 @@ if allRevs:
     print("")
     print("Revisions:")
     for rev in sorted(list(allRevs), key=int):
-        try:
-            cmd = ["git", "-C", repoDir, "log", "--all", "--grep", f"revision={rev}$", "--format=%H"]
-            result = subprocess.check_output(cmd)
-            commitHash = result.decode()
-            commitHash = commitHash.replace('\r', '').replace('\n', '')
-            if commitHash != "":
-                print(f"* r{rev}: {commitHash} https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
-            else:
-                print(f"* r{rev}: NotFound https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
-        except Exception as e:
-            print(f"* r{rev}:")
-            print(e)
+        if rev in revision_to_hash_map:
+            commitHash = revision_to_hash_map[rev]
+            print(f"* r{rev}: {commitHash} https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
+        else:
+            print(f"* r{rev}: NotFound https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
+

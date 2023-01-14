@@ -186,6 +186,8 @@ jobs:
             workdir/gitdir/log-ttssh2
             workdir/gitdir/log-migration.log
             workdir/gitdir/log-NotFound.log
+            workdir/gitdir/git-hash-list.log
+            workdir/gitdir/svn-rev-to-git-hash-map.csv
           # See https://github.com/actions/upload-artifact#retention-period
           retention-days: ${{env.retention-days}}
 

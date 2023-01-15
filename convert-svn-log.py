@@ -23,13 +23,12 @@ def get_svn_rev(repoDir, git_hash):
 
 def get_rev_hash_map(repoDir):
     # all revision list
-    all_git_hash = None
     cmd = ["git", "-C", repoDir, "rev-list", "--all"]
     result = subprocess.check_output(cmd).decode()
+    all_git_hash = { line for line in result.splitlines() }
     with open(f"git-hash-list.log", "w") as f:
-        for line in result.splitlines():
+        for line in all_git_hash:
             f.write(f"{line}\n")
-        all_git_hash = { line for line in result.splitlines() }
 
     csv_file = 'svn-rev-to-git-hash-map.csv'
 

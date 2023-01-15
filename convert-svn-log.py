@@ -5,6 +5,7 @@
 import sys
 import re
 import subprocess
+import os
 
 repoDir = "ttssh2"
 
@@ -76,12 +77,13 @@ if allRevs:
     print("Revisions:")
     for rev in sorted(list(allRevs), key=int):
         try:
-            cmd = ["git", "-C", repoDir, "log", "--all", "--grep", f"revision={rev}$", "--format=%H"]
-            result = subprocess.check_output(cmd)
-            commitHash = result.decode()
-            commitHash = commitHash.replace('\r', '').replace('\n', '')
-            if commitHash != "":
-                print(f"* r{rev}: {commitHash} https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
+            git_log_grep_sh = os.path.join(os.path.dirname(__file__), "git-log-grep.sh")
+            cmd = ["sh", git_log_grep_sh, repoDir, str(rev)]
+            result = subprocess.check_output(cmd).decode()
+            commit_hashes = { line for line in result.splitlines() }
+            if commit_hashes:
+                for commit_hash in commit_hashes:
+                    print(f"* r{rev}: {commit_hash} https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
             else:
                 print(f"* r{rev}: NotFound https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
         except Exception as e:

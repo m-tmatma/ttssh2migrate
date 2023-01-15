@@ -40,7 +40,7 @@ def get_rev_hash_map(repoDir):
         with open(csv_file, "r") as f:
             reader = csv.DictReader(f)
             for row in reader:
-                svn_rev  = int(row["svn_rev"])
+                svn_rev  = row["svn_rev"]
                 git_hash = row["git_hash"]
                 revision_to_hash_map[svn_rev] = git_hash
                 cached_git_hash.add(git_hash)

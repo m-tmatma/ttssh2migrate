@@ -55,6 +55,7 @@ def get_rev_hash_map(repoDir):
         writer.writeheader()
         for svn_rev, git_hash in revision_to_hash_map.items():
             writer.writerow({'svn_rev' : svn_rev, 'git_hash' : git_hash})
+    return revision_to_hash_map
 
 repoDir = "ttssh2"
 

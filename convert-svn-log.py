@@ -7,6 +7,7 @@ import re
 import subprocess
 import csv
 import os
+import traceback
 
 def get_log(repoDir, git_hash):
     cmd = ["git", "-C", repoDir, "log", "-n", "1", git_hash]
@@ -71,6 +72,7 @@ try:
 except Exception as e:
     with open("log.log", "a") as f:
         f.write(f"{e}\n")
+        f.write(traceback.format_exc())
     raise
 
 for line in sys.stdin:
@@ -133,9 +135,17 @@ if allRevs:
     print("")
     print("Revisions:")
     for rev in sorted(list(allRevs), key=int):
-        if rev in revision_to_hash_map:
-            commitHash = revision_to_hash_map[rev]
-            print(f"* r{rev}: {commitHash} https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
-        else:
-            print(f"* r{rev}: NotFound https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
+        try:
+            if rev in revision_to_hash_map:
+                commitHash = revision_to_hash_map[rev]
+                print(f"* r{rev}: {commitHash} https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
+            else:
+                print(f"* r{rev}: NotFound https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
+        except Exception as e:
+            sys.stderr.write(f"{e}\n")
+            with open("log.log", "a") as f:
+                f.write(f"{e}\n")
+                f.write(traceback.format_exc())
+            raise
+
 

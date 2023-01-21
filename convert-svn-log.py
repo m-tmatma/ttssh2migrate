@@ -50,9 +50,14 @@ def showHashes(svn_revs):
                         print(f"* r{rev}: NotFound mark={mark} https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
                         gitList = list(gitMap.items())
                         print("rev:", rev, "mark", mark)
+                        cache_v_r = []
                         for r, v in gitMap.items():
                             if len(r) < 10:
-                                print("gitMap:", r, v)
+                                cache_v_r.append( (r, v))
+
+                        # show last 10 items.
+                        for r, v in cache_v_r[-10:]:
+                            print("gitMap:", r, v)
                         print(gitList[-1])
             else:
                 print(f"svnMap[{rev}] not found")

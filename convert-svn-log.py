@@ -39,7 +39,9 @@ def showHashes(svn_revs):
     try:
         svnMap, gitMap = loadLogs()
         for rev in svn_revs:
-            if rev in svnMap:
+            rev = int(rev)
+            mark = svnMap.get(rev, None)
+            if mark is not None:
                 for mark in svnMap[rev]:
                     if mark in gitMap:
                         commitHash = gitMap[mark]

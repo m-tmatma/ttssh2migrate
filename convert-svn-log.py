@@ -30,9 +30,7 @@ def loadLogs():
     if os.path.exists(marks_ttssh2):
         with open(marks_ttssh2, "r") as f:
             for line in f:
-                data =  line.split()
-                mark = data[0].replace(':', '')
-                commitHash = data[1]
+                mark, commitHash =  line.split()
                 gitMap[mark] = commitHash
 
     return svnMap, gitMap

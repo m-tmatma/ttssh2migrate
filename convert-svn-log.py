@@ -4,7 +4,53 @@
 #
 import sys
 import re
-import subprocess
+import os
+import csv
+import traceback
+
+def loadLogs():
+    svn2marks = 'svn2marks.csv'
+    marks_ttssh2 = 'ttssh2/marks-ttssh2'
+
+    svnMap = {}
+    if os.path.exists(svn2marks):
+        with open(svn2marks, "r", newline='') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                mark = row['mark']
+                rev = row['revnum']
+                if rev not in svnMap:
+                    svnMap[rev] = []
+                svnMap[rev].append(mark)
+
+    # sample of 'marks-ttssh2'
+    # :1 e62e564072f23a29c39c1ff539849bceab61785b
+    gitMap = {}
+    if os.path.exists(marks_ttssh2):
+        with open(marks_ttssh2, "r") as f:
+            for line in f:
+                data =  line.split()
+                mark = data[0].replace(':', '')
+                commitHash = data[1]
+                gitMap[mark] = commitHash
+
+    return svnMap, gitMap
+
+def showHashes(svn_revs):
+    try:
+        svnMap, gitMap = loadLogs()
+        for rev in svn_revs:
+            try:
+                for mark in svnMap[rev]:
+                    commitHash = gitMap[mark]
+                    print(f"* r{rev}: {commitHash} https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
+            except Exception as e:
+                print(f"* r{rev}: NotFound https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
+    except Exception as e:
+        print(e)
+        traceback.print_stack()
+        for rev in svn_revs:
+            print(f"* r{rev}: NotFound https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
 
 repoDir = "ttssh2"
 
@@ -74,16 +120,4 @@ if allIssues:
 if allRevs:
     print("")
     print("Revisions:")
-    for rev in sorted(list(allRevs), key=int):
-        try:
-            cmd = ["git", "-C", repoDir, "log", "--all", "--grep", f"revision={rev}$", "--format=%H"]
-            result = subprocess.check_output(cmd)
-            commitHash = result.decode()
-            commitHash = commitHash.replace('\r', '').replace('\n', '')
-            if commitHash != "":
-                print(f"* r{rev}: {commitHash} https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
-            else:
-                print(f"* r{rev}: NotFound https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
-        except Exception as e:
-            print(f"* r{rev}:")
-            print(e)
+    showHashes(sorted(list(allRevs), key=int))

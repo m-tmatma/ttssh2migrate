@@ -51,7 +51,8 @@ def showHashes(svn_revs):
                         gitList = list(gitMap.items())
                         print("rev:", rev, "mark", mark)
                         for r, v in gitMap.items():
-                            print("gitMap:", r, v)
+                            if len(r) < 10:
+                                print("gitMap:", r, v)
                         print(gitList[-1])
             else:
                 print(f"svnMap[{rev}] not found")

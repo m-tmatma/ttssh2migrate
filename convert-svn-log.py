@@ -7,12 +7,13 @@ import re
 import os
 import csv
 import traceback
+from collections import OrderedDict
 
 def loadLogs():
     svn2marks = 'svn2marks.csv'
     marks_ttssh2 = 'ttssh2/marks-ttssh2'
 
-    svnMap = {}
+    svnMap = OrderedDict()
     if os.path.exists(svn2marks):
         with open(svn2marks, "r", newline='') as f:
             reader = csv.DictReader(f)
@@ -25,7 +26,7 @@ def loadLogs():
 
     # sample of 'marks-ttssh2'
     # :1 e62e564072f23a29c39c1ff539849bceab61785b
-    gitMap = {}
+    gitMap = OrderedDict()
     if os.path.exists(marks_ttssh2):
         with open(marks_ttssh2, "r") as f:
             for line in f:
@@ -40,15 +41,24 @@ def showHashes(svn_revs):
     try:
         svnMap, gitMap = loadLogs()
         for rev in svn_revs:
-            try:
+            if rev in svnMap:
                 for mark in svnMap[rev]:
-                    commitHash = gitMap[mark]
-                    print(f"* r{rev}: {commitHash} https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
-            except Exception as e:
+                    if mark in gitMap:
+                        commitHash = gitMap[mark]
+                        print(f"* r{rev}: {commitHash} https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
+                    else:
+                        print(f"* r{rev}: NotFound mark={mark} https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
+                        gitList = list(gitMap.items())
+                        print("rev:", rev, "mark", mark)
+                        print(gitList[-1])
+            else:
                 print(f"* r{rev}: NotFound https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
+                gitList = list(gitMap.items())
+                print("rev:", rev)
+                print(gitList[-1])
     except Exception as e:
-        print(e)
-        traceback.print_stack()
+        a, b, c = sys.exc_info()
+        traceback.print_tb(c)
         for rev in svn_revs:
             print(f"* r{rev}: NotFound https://osdn.net/projects/ttssh2/scm/svn/commits/{rev}")
 

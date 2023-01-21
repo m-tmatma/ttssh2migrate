@@ -19,7 +19,7 @@ def loadLogs():
             reader = csv.DictReader(f)
             for row in reader:
                 mark = row['mark']
-                rev = row['revnum']
+                rev = int(row['revnum'])
                 if rev not in svnMap:
                     svnMap[rev] = []
                 svnMap[rev].append(mark)
